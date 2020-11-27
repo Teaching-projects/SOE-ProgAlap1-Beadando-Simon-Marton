@@ -19,7 +19,6 @@ def set_table():
     return map
 
 def give_new_2(map):
-    map = set_table()
     sor = random.randint(0,3)
     oszlop = random.randint(0,3)
     if map[sor][oszlop] != 0:
@@ -50,6 +49,9 @@ def lose(map):
 
 def összegez(map):
     újmap = []
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == map[i][]
 
     
 ###főprogram###
