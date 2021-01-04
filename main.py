@@ -3,6 +3,7 @@ import json
 """Meghívjuk az alapok modulet, ami segitsegevel osszerakom a foprogramot"""
 
 map = alapok.betöltés("állás.txt")
+alapok.mapprint(map)
 
 while(True):
     """legeloszor a command fuggvenyt meghivva bekerjuk a commandot, majd a kapot valaszt lekezeli az adott 6 if/elif statement"""
@@ -17,7 +18,8 @@ while(True):
         map = alapok.move_up(map)
         status = alapok.get_current_state(map) 
         if(status == 'GAME NOT OVER'): 
-            alapok.give_new_2(map)   
+            alapok.give_new_2(map)
+            alapok.mapprint(map)
         elif status == 'GAME OVER':
             print("Game Over")
             break
@@ -31,7 +33,8 @@ while(True):
         map = alapok.move_down(map) 
         status = alapok.get_current_state(map) 
         if(status == 'GAME NOT OVER'): 
-            alapok.give_new_2(map) 
+            alapok.give_new_2(map)
+            alapok.mapprint(map)
         elif status == 'GAME OVER':
             print("Game Over")
             break
@@ -46,7 +49,8 @@ while(True):
         map = alapok.move_left(map) 
         status = alapok.get_current_state(map) 
         if status == 'GAME NOT OVER': 
-            alapok.give_new_2(map) 
+            alapok.give_new_2(map)
+            alapok.mapprint(map)
         elif status == 'GAME OVER':
             print("Game Over")
             break
@@ -60,7 +64,8 @@ while(True):
         map = alapok.move_right(map)
         status = alapok.get_current_state(map)  
         if(status == 'GAME NOT OVER'):
-            alapok.give_new_2(map) 
+            alapok.give_new_2(map)
+            alapok.mapprint(map)
         elif status == 'GAME OVER':
             print("Game Over")
             break

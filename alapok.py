@@ -39,7 +39,6 @@ def give_new_2(map:list) -> None:
             oszlop = random.randint(0,3)
         map[sor][oszlop] = 2
 
-    mapprint(map)
 
 def win(map:list) -> bool:
     """A függvény ami megnézi hogy nyertünk-e"""
