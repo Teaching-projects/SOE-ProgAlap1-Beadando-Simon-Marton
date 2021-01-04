@@ -16,62 +16,59 @@ while(True):
         """Ha azt kapjuk vissza hogy "Game not over", akkor elohivjuk a give_new_2 fuggvenyt es minden megy tovább"""
         """Ha pedig azt kapjuk hogy "Game over", vagy "Won", akkor pedig vege van a jateknak, egy breakkel pedig kilepunk a programbol"""
         map = alapok.move_up(map)
-        status = alapok.get_current_state(map) 
-        if(status == 'GAME NOT OVER'): 
+        if alapok.win(map) == True:
+            print("You have Won! Congratulations!")
+            break
+        elif alapok.lose(map) == True:
+            print("You have Lost!, Try Again!")
+            break
+        else:
             alapok.give_new_2(map)
             alapok.mapprint(map)
-        elif status == 'GAME OVER':
-            print("Game Over")
-            break
-        elif status == 'WON':
-            print("You have won")
-            break
   
     # to move down 
     elif command  == 's':
         """A kovetkezo 3 fuggveny hasonlo modon mukodik mint az elozo: 1. megnezzuk mi a kommand, 2. lekerjuk a statuszt, 3. a statusz alapjan levonjuk a kovetkeztetest"""
         map = alapok.move_down(map) 
-        status = alapok.get_current_state(map) 
-        if(status == 'GAME NOT OVER'): 
+        if alapok.win(map) == True:
+            print("You have Won! Congratulations!")
+            break
+        elif alapok.lose(map) == True:
+            print("You have Lost!, Try Again!")
+            break
+        else:
             alapok.give_new_2(map)
             alapok.mapprint(map)
-        elif status == 'GAME OVER':
-            print("Game Over")
-            break
-        elif status == 'WON':
-            print("You have won")
-            break
             
   
     # to move left 
     elif command == 'a': 
         """Ez is igy mukodik"""
-        map = alapok.move_left(map) 
-        status = alapok.get_current_state(map) 
-        if status == 'GAME NOT OVER': 
+        map = alapok.move_left(map)
+        if alapok.win(map) == True:
+            print("You have Won! Congratulations!")
+            break
+        elif alapok.lose(map) == True:
+            print("You have Lost!, Try Again!")
+            break
+        else:
             alapok.give_new_2(map)
             alapok.mapprint(map)
-        elif status == 'GAME OVER':
-            print("Game Over")
-            break
-        elif status == 'WON':
-            print("You have won")
-            break
+
   
     # to move right 
     elif command == 'd':
         """Ez is igy mukodik"""
         map = alapok.move_right(map)
-        status = alapok.get_current_state(map)  
-        if(status == 'GAME NOT OVER'):
+        if alapok.win(map) == True:
+            print("You have Won! Congratulations!")
+            break
+        elif alapok.lose(map) == True:
+            print("You have Lost!, Try Again!")
+            break
+        else:
             alapok.give_new_2(map)
             alapok.mapprint(map)
-        elif status == 'GAME OVER':
-            print("Game Over")
-            break
-        elif status == 'WON':
-            print("You have won")
-            break
 
     elif command == "save":
         """Ha a program megkapja a save kommandot, akkor egy egyfajta "Quicksave", lép érvénybe, az adott map eltárolásra kerül egy "Állás.txt", nevu fájlba, majd a program kilep"""
