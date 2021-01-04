@@ -1,11 +1,7 @@
 import alapok
 import json
 
-mentesek_szama = 0
-if mentesek_szama == 0:
-    map = alapok.set_table()
-if mentesek_szama > 0:
-    map = alapok.betöltés(map)
+map = alapok.betöltés("állás.txt")
 
 while(True):
   
@@ -53,7 +49,7 @@ while(True):
     elif command == 'd':
         map = alapok.move_right(map)
         status = alapok.get_current_state(map)  
-        if(status == 'GAME NOT OVER'): 
+        if(status == 'GAME NOT OVER'):
             alapok.give_new_2(map) 
         elif status == 'GAME OVER':
             print("Game Over")
@@ -62,7 +58,6 @@ while(True):
             print("You have won")
             break
     elif command == "save":
-        mentesek_szama += 1
         alapok.mentés(map)
         break
     else: 

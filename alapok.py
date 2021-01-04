@@ -159,13 +159,17 @@ def mentés(map):
     json.dump(map, file)
     file.close()
 
-def betöltés(map):
+def betöltés(path):
     """Az elmentett allas betoltese, majd onnani folytatasa"""
     import json
-    file = open("állás.txt")
+    terkep = set_table()
+    file = open(path)
     map = json.load(file)
     file.close()
+    if map == []:
+        return terkep
     return map
+    
 
 def getcommand():
     """A command megadasa, majd visszakuldese"""
