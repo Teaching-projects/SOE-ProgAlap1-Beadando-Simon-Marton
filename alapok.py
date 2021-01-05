@@ -86,7 +86,31 @@ print(win(lista))
 print(win(lista2))
 """
 
+def horizontal_move_exists(map:list) -> bool:
+    for i in range(len(map)):
+        for j in range(len(map[i])-1):
+            if map[i][j] == map[i][j + 1]:
+                return True
+    
+    return False
+"""Teszteles"""
+"""
+lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+print(horizontal_move_exists(lista))
+"""
 
+def vertical_move_exists(map:list) -> bool:
+    for i in range(len(map)-1):
+        for j in range(len(map[i])):
+            if map[i][j] == map[i + 1][j]:
+                return True
+    
+    return False
+"""Teszteles"""
+"""
+lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+print(vertical_move_exists(lista))
+"""
 
 def lose(map:list) -> bool:
     """A függvény ami megnézi hogy vesztettünk-e"""
@@ -95,20 +119,32 @@ def lose(map:list) -> bool:
         for j in range(len(map[i])):
             if map[i][j] == 0:
                 nulla += 1
-    if nulla == 0:
+    if nulla == 0 and (vertical_move_exists(map) == False and horizontal_move_exists(map) == False):
         return True
     else:
         return False
-
 """Teszteles"""
 """
-lista = [[1024,8,4,8],[8,4,8,4],[2,16,4,32],[2,16,2,64]] -> True
-lista2 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,0]] -> False
+lista = [[2,4,256,2],[4,8,16,64],[16,32,512,1024],[256,16,4,64]]
+lista1 = [[8,8,8,8],[8,8,8,8],[8,4,8,4],[2,16,2,2]]
+lista2 = [[8,8,8,8],[8,8,8,8],[32,64,32,64],[2,8,2,16]]
+lista3 = [[8,8,8,8],[8,8,8,8],[1024,2,4,16],[2,16,2,16]]
+lista4 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,16,2,16]]
+print(mapprint(lista))
 print(lose(lista))
+print(lose(lista1))
 print(lose(lista2))
+print(lose(lista3))
+print(lose(lista4))
 """
 
-    
+def vanenulla(map):
+    nulla = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 0:
+                return True
+    return False
 def összehúzás(map:list) -> list:
     """Az alabbi fuggveny kulcsfontossagu, ugyanis ez osszehuzza terkepen talalhato elemeket, majd returnuli egy uj_map nevu valtozoban, es egy valtozas nevu booleannal, ami megvizsgalja tortent-e valtozas"""
     new_map = []
@@ -180,11 +216,15 @@ lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
 print(mapfordítás(lista))
 print(mapfordítás(lista2))
 """
-def mentés(map:list) -> None:
+def mentés(map:list, score:int) -> None:
     """Az allas mentese"""
     import json
     file = open("állás.txt","w")
-    json.dump(map, file)
+    data = {
+        "map": map,
+        "score": score,
+    }
+    json.dump(data, file)
     file.close()
 
 def betöltés(filename:str) -> list:
@@ -192,10 +232,15 @@ def betöltés(filename:str) -> list:
     import json
     try:
         file = open(filename,"r")
-        map = json.load(file)
+        data = json.load(file)
+        global map
+        global score
+        map = data["map"]
+        score = data["score"]
         file.close()
     except:
         map = set_table()
+        score = 0
     return map
 
 def getcommand() -> str:
