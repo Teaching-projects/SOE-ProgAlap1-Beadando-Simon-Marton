@@ -1,9 +1,14 @@
 from typing import List, Set, Dict, Tuple, Optional
-"""A module, ami a scoringot csinälja, a scoring egyszeru, amennyi szam van a tablan, a score egyenlo annak a 10X-sevel"""
-"""Valamint plusban az 1024 +500, a 2048 +1000 pontot jelent"""
 
 def score(map:list) -> int:
-    """Allscore változo bevezetesevel 3 for ciklussal elintezem a pontok kiszamitasat"""
+    """The function that calculates the score that the player has. First it calculates every number that is on the table, than the value gets multiplied by 10
+
+    Args:
+        map (list): The map
+
+    Returns:
+        int: The claculated score
+    """
 
     allscore = 0
     for i in range(len(map)):
@@ -23,6 +28,11 @@ def score(map:list) -> int:
     return allscore
 
 def writescore(map:list, allscore:int) -> None:
-    """Ebben pedig kiiratom oket"""
+    """This will print out the score
+
+    Args:
+        map (list): The map used to calculate the score
+        allscore (int): The score itself
+    """
     allscore = score(map)
     print("Your current score is: {}".format(allscore))

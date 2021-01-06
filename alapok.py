@@ -2,29 +2,35 @@ from typing import List, Set, Dict, Tuple, Optional
 import json
 import random
 
-"""Ebben a moduleban foleg az alap mukodeshez szukseges logikai dolgok vannak benne, peldaul a jatek kezdeti terkepenek felallitasa, uj 2es berakasa, osszegzes, mozgatas stb..."""
-
 def mapprint(map:list) -> None:
-    """ A függveny ami kiirja a mapot """
+    """The function that prints out the map
+
+    Args:
+        map (list): The map that is given here will be printed out
+    """
     for i in range(4):
         print(map[i])
 
-"""Teszteles"""
-"""
-lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-lista2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,2,2,2]]
-lista3 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-lista4 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
-lista5 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-print(mapprint(lista))
-print(mapprint(lista2))
-print(mapprint(lista3))
-print(mapprint(lista4))
-print(mapprint(lista5))
-"""
+#test
+
+#lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+#lista2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,2,2,2]]
+#lista3 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+#lista4 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
+#lista5 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#print(mapprint(lista))
+#print(mapprint(lista2))
+#print(mapprint(lista3))
+#print(mapprint(lista4))
+#print(mapprint(lista5))
+
 
 def give_new_2(map:list) -> None:
-    """Ez a fuggveny mindig belerak egy terkepbe egy 2est, de csak oda ahol 0-as van"""
+    """A function that will put a new 2 in a random location where 0-s are present
+
+    Args:
+        map (list): The map that u want to use
+    """
     sor = random.randint(0,3)
     oszlop = random.randint(0,3)
     if map[sor][oszlop] == 0:
@@ -34,27 +40,28 @@ def give_new_2(map:list) -> None:
             sor = random.randint(0,3)
             oszlop = random.randint(0,3)
         map[sor][oszlop] = 2
-"""Teszteles"""
-"""
-lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-lista2 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
-lista3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-give_new_2(lista)
-give_new_2(lista2)
-give_new_2(lista3)
-print(lista)
-print(lista2)
-print(lista3)
-"""
+#test
+#lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+#lista2 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
+#lista3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#give_new_2(lista)
+#give_new_2(lista2)
+#give_new_2(lista3)
+#print(lista)
+#print(lista2)
+#print(lista3)
+
 
 def set_table():
-    """A fuggveny ami a jatek elejen inicializalja a mapot, mjad egyezeteti a jatekossal a lehetseges parancsokat"""
+    """This is the start of everything, this will generate the first table, with a 2 in a random  place
+
+    Returns:
+        None: This returns nothing, only prints out the table
+    """
     map = []
     for i in range(4):
         sor = [0]*4
         map.append(sor)
-
-    """A lehetseges parancsok listaja"""
 
     print("Üdvözöllek a 2048-as játékban, a aprancsok a következők: ")
     print("w-fel/a-balra/s-le/d-jobbra/save-kimentés,befejezés")
@@ -63,57 +70,81 @@ def set_table():
     give_new_2(map)
 
     return map
-
-"""teszteles"""
-"""print(set_table())"""
-
-
-
+#test
+#print(set_table())
 
 def win(map:list) -> bool:
-    """A függvény ami megnézi hogy nyertünk-e"""
+    """The function that will check if you have won yet or not
+
+    Args:
+        map (list): It will check in this map
+
+    Returns:
+        bool: Will give a true if you have won and a false if you haven't won'
+    """
     for i in range(4):
         for j in range(4):
             if map[i][j] == 2048:
                 return True
     
     return False
-"""Teszteles"""
-"""
-lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]] -> True
-lista2 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,0]] -> False
-print(win(lista))
-print(win(lista2))
-"""
+#test
+
+#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]] -> True
+#lista2 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,0]] -> False
+#print(win(lista))
+#print(win(lista2))
+
 
 def horizontal_move_exists(map:list) -> bool:
+    """This is used in the lose function and checks if you can move horizontally
+
+    Args:
+        map (list): it checks in this map
+
+    Returns:
+        bool: Return a True if you can, a false if you can't
+    """
     for i in range(len(map)):
         for j in range(len(map[i])-1):
             if map[i][j] == map[i][j + 1]:
                 return True
     
     return False
-"""Teszteles"""
-"""
-lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-print(horizontal_move_exists(lista))
-"""
+#test
+#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#print(horizontal_move_exists(lista))
+
 
 def vertical_move_exists(map:list) -> bool:
+    """This will check if you can move vertically or not, also used in the lose function
+
+    Args:
+        map (list): The map u checking in
+
+    Returns:
+        bool: Return a True if you can, a false if you can't
+    """
     for i in range(len(map)-1):
         for j in range(len(map[i])):
             if map[i][j] == map[i + 1][j]:
                 return True
     
     return False
-"""Teszteles"""
-"""
-lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-print(vertical_move_exists(lista))
-"""
+#test
+#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#print(vertical_move_exists(lista))
+
 
 def lose(map:list) -> bool:
-    """A függvény ami megnézi hogy vesztettünk-e"""
+    """This function checks if you have lost or not. If there isnt any 0-s and you cant move vertically or horizontally, you have lost
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: Return a True if you Lost, a false if you didnt'
+    """
     nulla = 0
     for i in range(len(map)):
         for j in range(len(map[i])):
@@ -123,30 +154,44 @@ def lose(map:list) -> bool:
         return True
     else:
         return False
-"""Teszteles"""
-"""
-lista = [[2,4,256,2],[4,8,16,64],[16,32,512,1024],[256,16,4,64]]
-lista1 = [[8,8,8,8],[8,8,8,8],[8,4,8,4],[2,16,2,2]]
-lista2 = [[8,8,8,8],[8,8,8,8],[32,64,32,64],[2,8,2,16]]
-lista3 = [[8,8,8,8],[8,8,8,8],[1024,2,4,16],[2,16,2,16]]
-lista4 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,16,2,16]]
-print(mapprint(lista))
-print(lose(lista))
-print(lose(lista1))
-print(lose(lista2))
-print(lose(lista3))
-print(lose(lista4))
-"""
+#test
+#lista = [[2,4,256,2],[4,8,16,64],[16,32,512,1024],[256,16,4,64]]
+#lista1 = [[8,8,8,8],[8,8,8,8],[8,4,8,4],[2,16,2,2]]
+#lista2 = [[8,8,8,8],[8,8,8,8],[32,64,32,64],[2,8,2,16]]
+#lista3 = [[8,8,8,8],[8,8,8,8],[1024,2,4,16],[2,16,2,16]]
+#lista4 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,16,2,16]]
+#print(mapprint(lista))
+#print(lose(lista))
+#print(lose(lista1))
+#print(lose(lista2))
+#print(lose(lista3))
+#print(lose(lista4))
 
-def vanenulla(map):
+def vanenulla(map:list) -> bool:
+    """This function checks if there is a 0 on the map
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: True if there is a 0 on the map and false otherwise
+    """
     nulla = 0
     for i in range(len(map)):
         for j in range(len(map[i])):
             if map[i][j] == 0:
                 return True
     return False
+
 def összehúzás(map:list) -> list:
-    """Az alabbi fuggveny kulcsfontossagu, ugyanis ez osszehuzza terkepen talalhato elemeket, majd returnuli egy uj_map nevu valtozoban, es egy valtozas nevu booleannal, ami megvizsgalja tortent-e valtozas"""
+    """This function will pull the numbers in the map together
+
+    Args:
+        map (list): The map u are using
+
+    Returns:
+        list: The pulled form of the map
+    """
     new_map = []
 
     for i in range(4):
@@ -158,17 +203,24 @@ def összehúzás(map:list) -> list:
             if (map[i][j] != 0): 
                 new_map[i][pos] = map[i][j] 
                 pos += 1
+                
     return new_map
-"""Teszteles"""
-"""
-lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(összehúzás(lista))
-print(összehúzás(lista2))
-"""
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(összehúzás(lista))
+#print(összehúzás(lista2))
+
 
 def összegez(map:list) -> list:
-    """Az alabbi fuggveny osszegzi az egymas mellett levo ertekeket, majd visszaad egy valtozas erteket is ami alapbol false"""
+    """It will add the numbers together, and puts a ^on the second part
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        list: The added map
+    """
     for i in range(len(map)):
         for j in range(len(map[i])- 1):
             if map[i][j] != 0 and map[i][j] == map[i][j + 1]:
@@ -176,16 +228,22 @@ def összegez(map:list) -> list:
                 map[i][j + 1] = 0
     
     return map
-"""Teszteles"""
-"""
-lista = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(összegez(lista)), az output:
-[[2, 0, 4, 0], [4, 0, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
-"""
+#test
+#lista = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(összegez(lista)), az output:
+#[[2, 0, 4, 0], [4, 0, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
 
 
 def sorváltás(map:list) -> list:
-    """A sorvaltas fuggveny akkor fontos, ha jobbra megyunk"""
+    """
+    This will reverse the map
+
+    Args:
+        map (list): The map u are reversing
+
+    Returns:
+        list: The reversed version of map
+    """
     new_map = []
     for i in range(4):
         new_map.append([])
@@ -193,15 +251,21 @@ def sorváltás(map:list) -> list:
             new_map[i].append(map[i][3-j])
 
     return new_map
-"""Teszteles"""
-"""
-lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(sorváltás(lista))
-print(sorváltás(lista2))
-"""
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(sorváltás(lista))
+#print(sorváltás(lista2))
+
 def mapfordítás(map:list) -> list:
-    """a mapfordítás function akkor fontos ha fel, vagy le megyunk"""
+    """This will interchange the maps coluumns and rows
+
+    Args:
+        map (list): The map u are interchaning
+
+    Returns:
+        list: The interchanged version of the map
+    """
     new_map = []
     for i in range(4):
         new_map.append([])
@@ -209,15 +273,15 @@ def mapfordítás(map:list) -> list:
             new_map[i].append(map[j][i])
     
     return new_map
-"""Teszteles"""
-"""
-lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(mapfordítás(lista))
-print(mapfordítás(lista2))
-"""
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(mapfordítás(lista))
+#print(mapfordítás(lista2))
+
 def mentés(map:list, score:int) -> None:
-    """Az allas mentese"""
+    """This will save the map and the score u are currently at
+    """
     import json
     file = open("állás.txt","w")
     data = {
@@ -228,7 +292,11 @@ def mentés(map:list, score:int) -> None:
     file.close()
 
 def betöltés(filename:str) -> list:
-    """Az elmentett allas betoltese, majd onnani folytatasa"""
+    """This will load the data that you have saved
+
+    Returns:
+        list: the saved list
+    """
     import json
     try:
         file = open(filename,"r")
@@ -244,64 +312,91 @@ def betöltés(filename:str) -> list:
     return map
 
 def getcommand() -> str:
-    """A command megadasa, majd visszakuldese"""
+    """The function to get the command
+
+    Returns:
+        str: The command
+    """
     command = input("Adj meg egy parancsot! ")
     return command
-"""Teszteles"""
+#Test
+#print(getcommand())
 
 def move_left(map:list) -> list:
-    """Balra mozgasnal eloszor osszehuzzuk az ertekeket, majd osszeadjuk oket, majd megint osszehuzzuk oket, majd ezt visszaadjuk"""
+    """The function to handle the left moving command. First u pull the map together, than add the numbers, then pull again
+
+    Args:
+        map (list): the map u want to change
+
+    Returns:
+        list: the changed map
+    """
     new_map = összehúzás(map)
     new_map = összegez(new_map)
     new_map = összehúzás(new_map)
     return new_map
-"""Teszteles"""
-"""
-lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(move_left(lista))
-print(move_left(lista2))
-"""
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_left(lista))
+#print(move_left(lista2))
+
 
 def move_right(map:list) -> list:
-    """Jobbra mozgasnal sort fordítunk, balra mozgunk, visszafordítjuk a sort, majd visszaadjuk a megvaltozott terkepet"""
+    """The function to handle when u want to move right. First u reverse the map, then u use the move left function, that u reverse again to get the default map
+
+    Args:
+        map (list): The map u want to change
+
+    Returns:
+        list: The changed version of the map
+    """
     new_map = sorváltás(map)
     new_map = move_left(new_map)
     new_map = sorváltás(new_map)
     return new_map
-"""Teszteles"""
-"""
-lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(move_right(lista))
-print(move_right(lista2))
-"""
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_right(lista))
+#print(move_right(lista2))
+
 
 def move_up(map:list) -> list:
-    """Ha fel akarunk mozogni, eloszor megfordítjuk a map sorait, es oszlopait, majd az ertekeket balra huzzuk, majd fordítunk megeggyet hogy az eredeti mapot visszakapjuk"""
+    """The function that handles the up command. First u interchang the map, than u move left, than u interchange again to get the default map
+
+    Args:
+        map (list): The map u want to change
+
+    Returns:
+        list: The changed map
+    """
     new_map = mapfordítás(map)
     new_map = move_left(new_map)
     new_map = mapfordítás(new_map)
     return new_map
-"""Teszteles"""
-"""
-lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(move_up(lista))
-print(move_up(lista2))
-"""
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_up(lista))
+#print(move_up(lista2))
 
 def move_down(map:list) -> list:
-    """Ha le akarunk mozogni, ugyanugy megfordítjuk a mapot, majd jobbra huzzuk az ertekeket, majd visszafordítjuk alapallasba"""
+    """The function that handles the move down command, nfirst u interchange the map, than u move right, than u interchange again to get the default map
+
+    Args:
+        map (list): the map u want to change
+
+    Returns:
+        list: The changed map
+    """
     new_map = mapfordítás(map)
     new_map = move_right(new_map)
     new_map = mapfordítás(new_map)
     return new_map
-"""Teszteles"""
-"""
-lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-print(move_down(lista))
-print(move_down(lista2))
-"""
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_down(lista))
+#print(move_down(lista2))
 
