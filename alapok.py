@@ -10,7 +10,6 @@ def mapprint(map:list) -> None:
     """
     for i in range(4):
         print(map[i])
-print(mapprint.__doc__)
 
 #test
 
@@ -41,7 +40,6 @@ def give_new_2(map:list) -> None:
             sor = random.randint(0,3)
             oszlop = random.randint(0,3)
         map[sor][oszlop] = 2
-print(give_new_2.__doc__)
 #test
 #lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
 #lista2 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
@@ -72,7 +70,6 @@ def set_table():
     give_new_2(map)
 
     return map
-print(set_table.__doc__)
 #test
 #print(set_table())
 
@@ -91,7 +88,6 @@ def win(map:list) -> bool:
                 return True
     
     return False
-print(win.__doc__)
 #test
 
 #lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]] -> True
@@ -115,7 +111,6 @@ def horizontal_move_exists(map:list) -> bool:
                 return True
     
     return False
-print(horizontal_move_exists.__doc__)
 #test
 #lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
 #print(horizontal_move_exists(lista))
@@ -136,7 +131,6 @@ def vertical_move_exists(map:list) -> bool:
                 return True
     
     return False
-print(vertical_move_exists.__doc__)
 #test
 #lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
 #print(vertical_move_exists(lista))
@@ -160,7 +154,6 @@ def lose(map:list) -> bool:
         return True
     else:
         return False
-print(lose.__doc__)
 #test
 #lista = [[2,4,256,2],[4,8,16,64],[16,32,512,1024],[256,16,4,64]]
 #lista1 = [[8,8,8,8],[8,8,8,8],[8,4,8,4],[2,16,2,2]]
@@ -189,7 +182,6 @@ def vanenulla(map:list) -> bool:
             if map[i][j] == 0:
                 return True
     return False
-print(vanenulla.__doc__)
 
 def osszehuzas(map:list) -> list:
     """This function will pull the numbers in the map together
@@ -213,7 +205,6 @@ def osszehuzas(map:list) -> list:
                 pos += 1
                 
     return new_map
-print(osszehuzas.__doc__)
 #test
 #lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
 #lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
@@ -237,7 +228,6 @@ def osszegez(map:list) -> list:
                 map[i][j + 1] = 0
     
     return map
-print(osszegez.__doc__)
 #test
 #lista = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
 #print(osszegez(lista)), az output:
@@ -261,7 +251,6 @@ def sorvaltas(map:list) -> list:
             new_map[i].append(map[i][3-j])
 
     return new_map
-print(sorvaltas.__doc__)
 #test
 #lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
 #lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
@@ -284,7 +273,6 @@ def mapforditas(map:list) -> list:
             new_map[i].append(map[j][i])
     
     return new_map
-print(mapforditas.__doc__)
 #test
 #lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
 #lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
@@ -302,7 +290,6 @@ def mentes(map:list, score:int) -> None:
     }
     json.dump(data, file)
     file.close()
-print(mentes.__doc__)
 
 def betoltes(filename:str) -> list:
     """This will load the data that you have saved
@@ -323,7 +310,6 @@ def betoltes(filename:str) -> list:
         map = set_table()
         score = 0
     return map
-print(betoltes.__doc__)
 
 def getcommand() -> str:
     """The function to get the command
@@ -333,7 +319,6 @@ def getcommand() -> str:
     """
     command = input("Adj meg egy parancsot! ")
     return command
-print(getcommand.__doc__)
 #Test
 #print(getcommand())
 
@@ -350,7 +335,6 @@ def move_left(map:list) -> list:
     new_map = osszegez(new_map)
     new_map = osszehuzas(new_map)
     return new_map
-print(move_left.__doc__)
 #test
 #lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
 #lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
@@ -371,7 +355,6 @@ def move_right(map:list) -> list:
     new_map = move_left(new_map)
     new_map = sorvaltas(new_map)
     return new_map
-print(move_right.__doc__)
 #test
 #lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
 #lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
@@ -392,7 +375,6 @@ def move_up(map:list) -> list:
     new_map = move_left(new_map)
     new_map = mapforditas(new_map)
     return new_map
-print(move_up.__doc__)
 #test
 #lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
 #lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
@@ -412,7 +394,6 @@ def move_down(map:list) -> list:
     new_map = move_right(new_map)
     new_map = mapforditas(new_map)
     return new_map
-print(move_down.__doc__)
 #test
 #lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
 #lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]

@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>alapok API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>alapok</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from typing import List, Set, Dict, Tuple, Optional
+import json
+import random
+
+def mapprint(map:list) -&gt; None:
+    &#34;&#34;&#34;The function that prints out the map
+
+    Args:
+        map (list): The map that is given here will be printed out
+    &#34;&#34;&#34;
+    for i in range(4):
+        print(map[i])
+
+#test
+
+#lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+#lista2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,2,2,2]]
+#lista3 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+#lista4 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
+#lista5 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#print(mapprint(lista))
+#print(mapprint(lista2))
+#print(mapprint(lista3))
+#print(mapprint(lista4))
+#print(mapprint(lista5))
+
+
+def give_new_2(map:list) -&gt; None:
+    &#34;&#34;&#34;A function that will put a new 2 in a random location where 0-s are present
+
+    Args:
+        map (list): The map that u want to use
+    &#34;&#34;&#34;
+    sor = random.randint(0,3)
+    oszlop = random.randint(0,3)
+    if map[sor][oszlop] == 0:
+        map[sor][oszlop] = 2
+    else:
+        while map[sor][oszlop] != 0:
+            sor = random.randint(0,3)
+            oszlop = random.randint(0,3)
+        map[sor][oszlop] = 2
+#test
+#lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+#lista2 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
+#lista3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#give_new_2(lista)
+#give_new_2(lista2)
+#give_new_2(lista3)
+#print(lista)
+#print(lista2)
+#print(lista3)
+
+
+def set_table():
+    &#34;&#34;&#34;This is the start of everything, this will generate the first table, with a 2 in a random  place
+
+    Returns:
+        None: This returns nothing, only prints out the table
+    &#34;&#34;&#34;
+    map = []
+    for i in range(4):
+        sor = [0]*4
+        map.append(sor)
+
+    print(&#34;Üdvözöllek a 2048-as játékban, a aprancsok a következők: &#34;)
+    print(&#34;w-fel/a-balra/s-le/d-jobbra/save-kimentés,befejezés&#34;)
+    print(&#34;a játék kimenti ahol állsz ha az end parancsot nyomod meg, sok szerencsét&#34;)
+    print(&#34;Add meg a parncsot&#34;)
+    give_new_2(map)
+
+    return map
+#test
+#print(set_table())
+
+def win(map:list) -&gt; bool:
+    &#34;&#34;&#34;The function that will check if you have won yet or not
+
+    Args:
+        map (list): It will check in this map
+
+    Returns:
+        bool: Will give a true if you have won and a false if you haven&#39;t won&#39;
+    &#34;&#34;&#34;
+    for i in range(4):
+        for j in range(4):
+            if map[i][j] == 2048:
+                return True
+    
+    return False
+#test
+
+#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]] -&gt; True
+#lista2 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,0]] -&gt; False
+#print(win(lista))
+#print(win(lista2))
+
+
+def horizontal_move_exists(map:list) -&gt; bool:
+    &#34;&#34;&#34;This is used in the lose function and checks if you can move horizontally
+
+    Args:
+        map (list): it checks in this map
+
+    Returns:
+        bool: Return a True if you can, a false if you can&#39;t
+    &#34;&#34;&#34;
+    for i in range(len(map)):
+        for j in range(len(map[i])-1):
+            if map[i][j] == map[i][j + 1]:
+                return True
+    
+    return False
+#test
+#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#print(horizontal_move_exists(lista))
+
+
+def vertical_move_exists(map:list) -&gt; bool:
+    &#34;&#34;&#34;This will check if you can move vertically or not, also used in the lose function
+
+    Args:
+        map (list): The map u checking in
+
+    Returns:
+        bool: Return a True if you can, a false if you can&#39;t
+    &#34;&#34;&#34;
+    for i in range(len(map)-1):
+        for j in range(len(map[i])):
+            if map[i][j] == map[i + 1][j]:
+                return True
+    
+    return False
+#test
+#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+#print(vertical_move_exists(lista))
+
+
+def lose(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks if you have lost or not. If there isnt any 0-s and you cant move vertically or horizontally, you have lost
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: Return a True if you Lost, a false if you didnt&#39;
+    &#34;&#34;&#34;
+    nulla = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 0:
+                nulla += 1
+    if nulla == 0 and (vertical_move_exists(map) == False and horizontal_move_exists(map) == False):
+        return True
+    else:
+        return False
+#test
+#lista = [[2,4,256,2],[4,8,16,64],[16,32,512,1024],[256,16,4,64]]
+#lista1 = [[8,8,8,8],[8,8,8,8],[8,4,8,4],[2,16,2,2]]
+#lista2 = [[8,8,8,8],[8,8,8,8],[32,64,32,64],[2,8,2,16]]
+#lista3 = [[8,8,8,8],[8,8,8,8],[1024,2,4,16],[2,16,2,16]]
+#lista4 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,16,2,16]]
+#print(mapprint(lista))
+#print(lose(lista))
+#print(lose(lista1))
+#print(lose(lista2))
+#print(lose(lista3))
+#print(lose(lista4))
+
+def vanenulla(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks if there is a 0 on the map
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: True if there is a 0 on the map and false otherwise
+    &#34;&#34;&#34;
+    nulla = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 0:
+                return True
+    return False
+
+def osszehuzas(map:list) -&gt; list:
+    &#34;&#34;&#34;This function will pull the numbers in the map together
+
+    Args:
+        map (list): The map u are using
+
+    Returns:
+        list: The pulled form of the map
+    &#34;&#34;&#34;
+    new_map = []
+
+    for i in range(4):
+        new_map.append([0] * 4)
+
+    for i in range(4): 
+        pos = 0
+        for j in range(4): 
+            if (map[i][j] != 0): 
+                new_map[i][pos] = map[i][j] 
+                pos += 1
+                
+    return new_map
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(osszehuzas(lista))
+#print(osszehuzas(lista2))
+
+
+def osszegez(map:list) -&gt; list:
+    &#34;&#34;&#34;It will add the numbers together, and puts a ^on the second part
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        list: The added map
+    &#34;&#34;&#34;
+    for i in range(len(map)):
+        for j in range(len(map[i])- 1):
+            if map[i][j] != 0 and map[i][j] == map[i][j + 1]:
+                map[i][j] *= 2
+                map[i][j + 1] = 0
+    
+    return map
+#test
+#lista = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(osszegez(lista)), az output:
+#[[2, 0, 4, 0], [4, 0, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+
+def sorvaltas(map:list) -&gt; list:
+    &#34;&#34;&#34;
+    This will reverse the map
+
+    Args:
+        map (list): The map u are reversing
+
+    Returns:
+        list: The reversed version of map
+    &#34;&#34;&#34;
+    new_map = []
+    for i in range(4):
+        new_map.append([])
+        for j in range(4):
+            new_map[i].append(map[i][3-j])
+
+    return new_map
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(sorvaltas(lista))
+#print(sorvaltas(lista2))
+
+def mapforditas(map:list) -&gt; list:
+    &#34;&#34;&#34;This will interchange the maps coluumns and rows
+
+    Args:
+        map (list): The map u are interchaning
+
+    Returns:
+        list: The interchanged version of the map
+    &#34;&#34;&#34;
+    new_map = []
+    for i in range(4):
+        new_map.append([])
+        for j in range(4):
+            new_map[i].append(map[j][i])
+    
+    return new_map
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(mapforditas(lista))
+#print(mapforditas(lista2))
+
+def mentes(map:list, score:int) -&gt; None:
+    &#34;&#34;&#34;This will save the map and the score u are currently at
+    &#34;&#34;&#34;
+    import json
+    file = open(&#34;állás.txt&#34;,&#34;w&#34;)
+    data = {
+        &#34;map&#34;: map,
+        &#34;score&#34;: score,
+    }
+    json.dump(data, file)
+    file.close()
+
+def betoltes(filename:str) -&gt; list:
+    &#34;&#34;&#34;This will load the data that you have saved
+
+    Returns:
+        list: the saved list
+    &#34;&#34;&#34;
+    import json
+    try:
+        file = open(filename,&#34;r&#34;)
+        data = json.load(file)
+        global map
+        global score
+        map = data[&#34;map&#34;]
+        score = data[&#34;score&#34;]
+        file.close()
+    except:
+        map = set_table()
+        score = 0
+    return map
+
+def getcommand() -&gt; str:
+    &#34;&#34;&#34;The function to get the command
+
+    Returns:
+        str: The command
+    &#34;&#34;&#34;
+    command = input(&#34;Adj meg egy parancsot! &#34;)
+    return command
+#Test
+#print(getcommand())
+
+def move_left(map:list) -&gt; list:
+    &#34;&#34;&#34;The function to handle the left moving command. First u pull the map together, than add the numbers, then pull again
+
+    Args:
+        map (list): the map u want to change
+
+    Returns:
+        list: the changed map
+    &#34;&#34;&#34;
+    new_map = osszehuzas(map)
+    new_map = osszegez(new_map)
+    new_map = osszehuzas(new_map)
+    return new_map
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_left(lista))
+#print(move_left(lista2))
+
+
+def move_right(map:list) -&gt; list:
+    &#34;&#34;&#34;The function to handle when u want to move right. First u reverse the map, then u use the move left function, that u reverse again to get the default map
+
+    Args:
+        map (list): The map u want to change
+
+    Returns:
+        list: The changed version of the map
+    &#34;&#34;&#34;
+    new_map = sorvaltas(map)
+    new_map = move_left(new_map)
+    new_map = sorvaltas(new_map)
+    return new_map
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_right(lista))
+#print(move_right(lista2))
+
+
+def move_up(map:list) -&gt; list:
+    &#34;&#34;&#34;The function that handles the up command. First u interchang the map, than u move left, than u interchange again to get the default map
+
+    Args:
+        map (list): The map u want to change
+
+    Returns:
+        list: The changed map
+    &#34;&#34;&#34;
+    new_map = mapforditas(map)
+    new_map = move_left(new_map)
+    new_map = mapforditas(new_map)
+    return new_map
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_up(lista))
+#print(move_up(lista2))
+
+def move_down(map:list) -&gt; list:
+    &#34;&#34;&#34;The function that handles the move down command, nfirst u interchange the map, than u move right, than u interchange again to get the default map
+
+    Args:
+        map (list): the map u want to change
+
+    Returns:
+        list: The changed map
+    &#34;&#34;&#34;
+    new_map = mapforditas(map)
+    new_map = move_right(new_map)
+    new_map = mapforditas(new_map)
+    return new_map
+#test
+#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
+#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
+#print(move_down(lista))
+#print(move_down(lista2))</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="alapok.betoltes"><code class="name flex">
+<span>def <span class="ident">betoltes</span></span>(<span>filename: str) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This will load the data that you have saved</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>the saved list</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def betoltes(filename:str) -&gt; list:
+    &#34;&#34;&#34;This will load the data that you have saved
+
+    Returns:
+        list: the saved list
+    &#34;&#34;&#34;
+    import json
+    try:
+        file = open(filename,&#34;r&#34;)
+        data = json.load(file)
+        global map
+        global score
+        map = data[&#34;map&#34;]
+        score = data[&#34;score&#34;]
+        file.close()
+    except:
+        map = set_table()
+        score = 0
+    return map</code></pre>
+</details>
+</dd>
+<dt id="alapok.getcommand"><code class="name flex">
+<span>def <span class="ident">getcommand</span></span>(<span>) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function to get the command</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>The command</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getcommand() -&gt; str:
+    &#34;&#34;&#34;The function to get the command
+
+    Returns:
+        str: The command
+    &#34;&#34;&#34;
+    command = input(&#34;Adj meg egy parancsot! &#34;)
+    return command</code></pre>
+</details>
+</dd>
+<dt id="alapok.give_new_2"><code class="name flex">
+<span>def <span class="ident">give_new_2</span></span>(<span>map: list) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A function that will put a new 2 in a random location where 0-s are present</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map that u want to use</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def give_new_2(map:list) -&gt; None:
+    &#34;&#34;&#34;A function that will put a new 2 in a random location where 0-s are present
+
+    Args:
+        map (list): The map that u want to use
+    &#34;&#34;&#34;
+    sor = random.randint(0,3)
+    oszlop = random.randint(0,3)
+    if map[sor][oszlop] == 0:
+        map[sor][oszlop] = 2
+    else:
+        while map[sor][oszlop] != 0:
+            sor = random.randint(0,3)
+            oszlop = random.randint(0,3)
+        map[sor][oszlop] = 2</code></pre>
+</details>
+</dd>
+<dt id="alapok.horizontal_move_exists"><code class="name flex">
+<span>def <span class="ident">horizontal_move_exists</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This is used in the lose function and checks if you can move horizontally</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>it checks in this map</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>Return a True if you can, a false if you can't</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def horizontal_move_exists(map:list) -&gt; bool:
+    &#34;&#34;&#34;This is used in the lose function and checks if you can move horizontally
+
+    Args:
+        map (list): it checks in this map
+
+    Returns:
+        bool: Return a True if you can, a false if you can&#39;t
+    &#34;&#34;&#34;
+    for i in range(len(map)):
+        for j in range(len(map[i])-1):
+            if map[i][j] == map[i][j + 1]:
+                return True
+    
+    return False</code></pre>
+</details>
+</dd>
+<dt id="alapok.lose"><code class="name flex">
+<span>def <span class="ident">lose</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function checks if you have lost or not. If there isnt any 0-s and you cant move vertically or horizontally, you have lost</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are checking in</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>Return a True if you Lost, a false if you didnt'</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def lose(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks if you have lost or not. If there isnt any 0-s and you cant move vertically or horizontally, you have lost
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: Return a True if you Lost, a false if you didnt&#39;
+    &#34;&#34;&#34;
+    nulla = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 0:
+                nulla += 1
+    if nulla == 0 and (vertical_move_exists(map) == False and horizontal_move_exists(map) == False):
+        return True
+    else:
+        return False</code></pre>
+</details>
+</dd>
+<dt id="alapok.mapforditas"><code class="name flex">
+<span>def <span class="ident">mapforditas</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This will interchange the maps coluumns and rows</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are interchaning</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The interchanged version of the map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mapforditas(map:list) -&gt; list:
+    &#34;&#34;&#34;This will interchange the maps coluumns and rows
+
+    Args:
+        map (list): The map u are interchaning
+
+    Returns:
+        list: The interchanged version of the map
+    &#34;&#34;&#34;
+    new_map = []
+    for i in range(4):
+        new_map.append([])
+        for j in range(4):
+            new_map[i].append(map[j][i])
+    
+    return new_map</code></pre>
+</details>
+</dd>
+<dt id="alapok.mapprint"><code class="name flex">
+<span>def <span class="ident">mapprint</span></span>(<span>map: list) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function that prints out the map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map that is given here will be printed out</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mapprint(map:list) -&gt; None:
+    &#34;&#34;&#34;The function that prints out the map
+
+    Args:
+        map (list): The map that is given here will be printed out
+    &#34;&#34;&#34;
+    for i in range(4):
+        print(map[i])</code></pre>
+</details>
+</dd>
+<dt id="alapok.mentes"><code class="name flex">
+<span>def <span class="ident">mentes</span></span>(<span>map: list, score: int) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This will save the map and the score u are currently at</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mentes(map:list, score:int) -&gt; None:
+    &#34;&#34;&#34;This will save the map and the score u are currently at
+    &#34;&#34;&#34;
+    import json
+    file = open(&#34;állás.txt&#34;,&#34;w&#34;)
+    data = {
+        &#34;map&#34;: map,
+        &#34;score&#34;: score,
+    }
+    json.dump(data, file)
+    file.close()</code></pre>
+</details>
+</dd>
+<dt id="alapok.move_down"><code class="name flex">
+<span>def <span class="ident">move_down</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function that handles the move down command, nfirst u interchange the map, than u move right, than u interchange again to get the default map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>the map u want to change</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The changed map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_down(map:list) -&gt; list:
+    &#34;&#34;&#34;The function that handles the move down command, nfirst u interchange the map, than u move right, than u interchange again to get the default map
+
+    Args:
+        map (list): the map u want to change
+
+    Returns:
+        list: The changed map
+    &#34;&#34;&#34;
+    new_map = mapforditas(map)
+    new_map = move_right(new_map)
+    new_map = mapforditas(new_map)
+    return new_map</code></pre>
+</details>
+</dd>
+<dt id="alapok.move_left"><code class="name flex">
+<span>def <span class="ident">move_left</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function to handle the left moving command. First u pull the map together, than add the numbers, then pull again</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>the map u want to change</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>the changed map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_left(map:list) -&gt; list:
+    &#34;&#34;&#34;The function to handle the left moving command. First u pull the map together, than add the numbers, then pull again
+
+    Args:
+        map (list): the map u want to change
+
+    Returns:
+        list: the changed map
+    &#34;&#34;&#34;
+    new_map = osszehuzas(map)
+    new_map = osszegez(new_map)
+    new_map = osszehuzas(new_map)
+    return new_map</code></pre>
+</details>
+</dd>
+<dt id="alapok.move_right"><code class="name flex">
+<span>def <span class="ident">move_right</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function to handle when u want to move right. First u reverse the map, then u use the move left function, that u reverse again to get the default map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u want to change</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The changed version of the map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_right(map:list) -&gt; list:
+    &#34;&#34;&#34;The function to handle when u want to move right. First u reverse the map, then u use the move left function, that u reverse again to get the default map
+
+    Args:
+        map (list): The map u want to change
+
+    Returns:
+        list: The changed version of the map
+    &#34;&#34;&#34;
+    new_map = sorvaltas(map)
+    new_map = move_left(new_map)
+    new_map = sorvaltas(new_map)
+    return new_map</code></pre>
+</details>
+</dd>
+<dt id="alapok.move_up"><code class="name flex">
+<span>def <span class="ident">move_up</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function that handles the up command. First u interchang the map, than u move left, than u interchange again to get the default map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u want to change</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The changed map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def move_up(map:list) -&gt; list:
+    &#34;&#34;&#34;The function that handles the up command. First u interchang the map, than u move left, than u interchange again to get the default map
+
+    Args:
+        map (list): The map u want to change
+
+    Returns:
+        list: The changed map
+    &#34;&#34;&#34;
+    new_map = mapforditas(map)
+    new_map = move_left(new_map)
+    new_map = mapforditas(new_map)
+    return new_map</code></pre>
+</details>
+</dd>
+<dt id="alapok.osszegez"><code class="name flex">
+<span>def <span class="ident">osszegez</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>It will add the numbers together, and puts a ^on the second part</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are checking in</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The added map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def osszegez(map:list) -&gt; list:
+    &#34;&#34;&#34;It will add the numbers together, and puts a ^on the second part
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        list: The added map
+    &#34;&#34;&#34;
+    for i in range(len(map)):
+        for j in range(len(map[i])- 1):
+            if map[i][j] != 0 and map[i][j] == map[i][j + 1]:
+                map[i][j] *= 2
+                map[i][j + 1] = 0
+    
+    return map</code></pre>
+</details>
+</dd>
+<dt id="alapok.osszehuzas"><code class="name flex">
+<span>def <span class="ident">osszehuzas</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function will pull the numbers in the map together</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are using</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The pulled form of the map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def osszehuzas(map:list) -&gt; list:
+    &#34;&#34;&#34;This function will pull the numbers in the map together
+
+    Args:
+        map (list): The map u are using
+
+    Returns:
+        list: The pulled form of the map
+    &#34;&#34;&#34;
+    new_map = []
+
+    for i in range(4):
+        new_map.append([0] * 4)
+
+    for i in range(4): 
+        pos = 0
+        for j in range(4): 
+            if (map[i][j] != 0): 
+                new_map[i][pos] = map[i][j] 
+                pos += 1
+                
+    return new_map</code></pre>
+</details>
+</dd>
+<dt id="alapok.set_table"><code class="name flex">
+<span>def <span class="ident">set_table</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This is the start of everything, this will generate the first table, with a 2 in a random
+place</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>This returns nothing, only prints out the table</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_table():
+    &#34;&#34;&#34;This is the start of everything, this will generate the first table, with a 2 in a random  place
+
+    Returns:
+        None: This returns nothing, only prints out the table
+    &#34;&#34;&#34;
+    map = []
+    for i in range(4):
+        sor = [0]*4
+        map.append(sor)
+
+    print(&#34;Üdvözöllek a 2048-as játékban, a aprancsok a következők: &#34;)
+    print(&#34;w-fel/a-balra/s-le/d-jobbra/save-kimentés,befejezés&#34;)
+    print(&#34;a játék kimenti ahol állsz ha az end parancsot nyomod meg, sok szerencsét&#34;)
+    print(&#34;Add meg a parncsot&#34;)
+    give_new_2(map)
+
+    return map</code></pre>
+</details>
+</dd>
+<dt id="alapok.sorvaltas"><code class="name flex">
+<span>def <span class="ident">sorvaltas</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This will reverse the map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are reversing</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The reversed version of map</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def sorvaltas(map:list) -&gt; list:
+    &#34;&#34;&#34;
+    This will reverse the map
+
+    Args:
+        map (list): The map u are reversing
+
+    Returns:
+        list: The reversed version of map
+    &#34;&#34;&#34;
+    new_map = []
+    for i in range(4):
+        new_map.append([])
+        for j in range(4):
+            new_map[i].append(map[i][3-j])
+
+    return new_map</code></pre>
+</details>
+</dd>
+<dt id="alapok.vanenulla"><code class="name flex">
+<span>def <span class="ident">vanenulla</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function checks if there is a 0 on the map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are checking in</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True if there is a 0 on the map and false otherwise</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def vanenulla(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks if there is a 0 on the map
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: True if there is a 0 on the map and false otherwise
+    &#34;&#34;&#34;
+    nulla = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 0:
+                return True
+    return False</code></pre>
+</details>
+</dd>
+<dt id="alapok.vertical_move_exists"><code class="name flex">
+<span>def <span class="ident">vertical_move_exists</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This will check if you can move vertically or not, also used in the lose function</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u checking in</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>Return a True if you can, a false if you can't</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def vertical_move_exists(map:list) -&gt; bool:
+    &#34;&#34;&#34;This will check if you can move vertically or not, also used in the lose function
+
+    Args:
+        map (list): The map u checking in
+
+    Returns:
+        bool: Return a True if you can, a false if you can&#39;t
+    &#34;&#34;&#34;
+    for i in range(len(map)-1):
+        for j in range(len(map[i])):
+            if map[i][j] == map[i + 1][j]:
+                return True
+    
+    return False</code></pre>
+</details>
+</dd>
+<dt id="alapok.win"><code class="name flex">
+<span>def <span class="ident">win</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function that will check if you have won yet or not</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>It will check in this map</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>Will give a true if you have won and a false if you haven't won'</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def win(map:list) -&gt; bool:
+    &#34;&#34;&#34;The function that will check if you have won yet or not
+
+    Args:
+        map (list): It will check in this map
+
+    Returns:
+        bool: Will give a true if you have won and a false if you haven&#39;t won&#39;
+    &#34;&#34;&#34;
+    for i in range(4):
+        for j in range(4):
+            if map[i][j] == 2048:
+                return True
+    
+    return False</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="alapok.betoltes" href="#alapok.betoltes">betoltes</a></code></li>
+<li><code><a title="alapok.getcommand" href="#alapok.getcommand">getcommand</a></code></li>
+<li><code><a title="alapok.give_new_2" href="#alapok.give_new_2">give_new_2</a></code></li>
+<li><code><a title="alapok.horizontal_move_exists" href="#alapok.horizontal_move_exists">horizontal_move_exists</a></code></li>
+<li><code><a title="alapok.lose" href="#alapok.lose">lose</a></code></li>
+<li><code><a title="alapok.mapforditas" href="#alapok.mapforditas">mapforditas</a></code></li>
+<li><code><a title="alapok.mapprint" href="#alapok.mapprint">mapprint</a></code></li>
+<li><code><a title="alapok.mentes" href="#alapok.mentes">mentes</a></code></li>
+<li><code><a title="alapok.move_down" href="#alapok.move_down">move_down</a></code></li>
+<li><code><a title="alapok.move_left" href="#alapok.move_left">move_left</a></code></li>
+<li><code><a title="alapok.move_right" href="#alapok.move_right">move_right</a></code></li>
+<li><code><a title="alapok.move_up" href="#alapok.move_up">move_up</a></code></li>
+<li><code><a title="alapok.osszegez" href="#alapok.osszegez">osszegez</a></code></li>
+<li><code><a title="alapok.osszehuzas" href="#alapok.osszehuzas">osszehuzas</a></code></li>
+<li><code><a title="alapok.set_table" href="#alapok.set_table">set_table</a></code></li>
+<li><code><a title="alapok.sorvaltas" href="#alapok.sorvaltas">sorvaltas</a></code></li>
+<li><code><a title="alapok.vanenulla" href="#alapok.vanenulla">vanenulla</a></code></li>
+<li><code><a title="alapok.vertical_move_exists" href="#alapok.vertical_move_exists">vertical_move_exists</a></code></li>
+<li><code><a title="alapok.win" href="#alapok.win">win</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>

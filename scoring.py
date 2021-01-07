@@ -26,7 +26,6 @@ def score(map:list) -> int:
             if map[i][j] == 2048:
                 allscore += 1000
     return allscore
-print(score.__doc__)
 
 def writescore(map:list, allscore:int) -> None:
     """This will print out the score
@@ -37,4 +36,3 @@ def writescore(map:list, allscore:int) -> None:
     """
     allscore = score(map)
     print("Your current score is: {}".format(allscore))
-print(writescore.__doc__)

@@ -1,10 +1,11 @@
 import json
 import alapok
 import scoring
+import sys
 from typing import List, Set, Dict, Tuple, Optional
 
 
-def start():
+def start() -> None:
     """This will generate the map, or saves in the map from allas.txt if it exists.
 
     Returns:
@@ -12,8 +13,8 @@ def start():
     """
     map = alapok.betoltes("állás.txt")
     alapok.mapprint(map)
+    scoring.writescore(map, scoring.score(map))
     return map
-print(start.__doc__)
 
 def up(map:list) -> list:
     """The function to move up and handle the state t´where the player is at right now
@@ -27,10 +28,10 @@ def up(map:list) -> list:
     map = alapok.move_up(map)
     if alapok.win(map) == True:
         print("You have Won! Congratulations!")
-
+        sys.exit()
     elif alapok.lose(map) == True:
         print("You have Lost!")
-
+        sys.exit()
     elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
         alapok.mapprint(map)
         print("erre nem tudsz már lépni de másik irányba igen")
@@ -42,7 +43,6 @@ def up(map:list) -> list:
         scoring.writescore(map, scoring.score(map))
 
     return map
-print(up.__doc__)
 
 def down(map:list) -> list:
     """The function that moves down the map and gets the state of the game
@@ -56,10 +56,10 @@ def down(map:list) -> list:
     map = alapok.move_down(map)
     if alapok.win(map) == True:
         print("You have Won! Congratulations!")
-
+        sys.exit()
     elif alapok.lose(map) == True:
         print("You have Lost!")
-
+        sys.exit()
     elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
         alapok.mapprint(map)
         print("erre nem tudsz már lépni de másik irányba igen")
@@ -70,7 +70,6 @@ def down(map:list) -> list:
         scoring.writescore(map, scoring.score(map))
 
     return map
-print(down.__doc__)
 
 def left(map:list) -> list:
     """The map that handles the move down command, and gets the state of the game
@@ -84,10 +83,10 @@ def left(map:list) -> list:
     map = alapok.move_left(map)
     if alapok.win(map) == True:
         print("You have Won! Congratulations!")
-
+        sys.exit()
     elif alapok.lose(map) == True:
         print("You have Lost!")
-
+        sys.exit()
     elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
         alapok.mapprint(map)
         print("erre nem tudsz már lépni de másik irányba igen")
@@ -97,7 +96,6 @@ def left(map:list) -> list:
         alapok.mapprint(map)
         scoring.writescore(map, scoring.score(map))
     return map
-print(left.__doc__)
 
 def right(map:list) -> list:
     """The function that handles the move right command and gets the state of the game
@@ -111,10 +109,10 @@ def right(map:list) -> list:
     map = alapok.move_right(map)
     if alapok.win(map) == True:
         print("You have Won! Congratulations!")
-
+        sys.exit()
     elif alapok.lose(map) == True:
         print("You have Lost!")
-
+        sys.exit()
     elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
         alapok.mapprint(map)
         print("erre nem tudsz már lépni de másik irányba igen")
@@ -124,7 +122,6 @@ def right(map:list) -> list:
         alapok.mapprint(map)
         scoring.writescore(map, scoring.score(map))
     return map
-print(right.__doc__)
 
 def save(score:int,map:list) -> None:
     """The function that saves the score and map
@@ -135,7 +132,6 @@ def save(score:int,map:list) -> None:
     """
     score = scoring.score(map)
     alapok.mentes(map, score)
-print(save.__doc__)
 
 def badcommand() -> str:
     """If you entered a bad command and error message will pop up
@@ -144,7 +140,6 @@ def badcommand() -> str:
         str: An error mesage
     """
     print("Rossz gomb")
-print(badcommand.__doc__)
 
 def basics(command:str,map:list) -> list:
     """This will handle every single command and what happens after that
@@ -170,7 +165,6 @@ def basics(command:str,map:list) -> list:
     else:
         badcommand()
     return map
-print(basics.__doc__)
 
 def main() -> None:
     """Generates the map, and also handles the basic function
@@ -180,4 +174,3 @@ def main() -> None:
     while(True):
         command = alapok.getcommand()
         map = basics(command,map)
-print(main.__doc__)
