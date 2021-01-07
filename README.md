@@ -11,5 +11,5 @@ Ha a játékos a 2048 elérése előtt fut ki a helyből az Game Overt jelent
 
 # A program felépítése:
 
-A program függvényekből és egy főrészből áll, melyben az előre megírt függvények vannak meghívva.
-Minden függvény rendelkezik teszttel, és az egész program dokumentálvva van
+A program modulokból és egy fómodulból áll, melyben az előre megírt függvények vannak meghívva.
+Minden függvény rendelkezik teszttel, és az egész program dokumentálvva van html-formátumban pdoc3 használatával
