@@ -1,7 +1,7 @@
 # SOE-ProgAlap1-Beadando-Simon-Marton
 
-A program egy 4X4-es Táblázatban egy 2048-as játékot takar, amelyben a w/a/s/d gombok lenyomásával, valamint az "exit", parancsszóval tudjuk irányítani a dolgokat.
-Ha az "save" parancsszót kapja meg a program, az automatikus elmentést jelent egy Json fájlba, melyet későbbi ujrabetöltéssel lehet folytatni.
+A program egy 4X4-es Táblázatban egy 2048-as játékot takar, amelyben a w/a/s/d gombok lenyomásával, valamint a "save", parancsszóval tudunk irányítani.
+Ha a "save" parancsszót kapja meg a program, az automatikus elmentést jelent egy Json fájlba, melyet későbbi ujrabetöltéssel lehet folytatni.
 # A Működési elvek:
 
 A játék folyamatosan jelzi a játékosnak a pontot  és a táblázatot.
