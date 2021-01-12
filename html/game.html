@@ -28,146 +28,112 @@
 </summary>
 <pre><code class="python">import json
 import alapok
-import scoring
 import sys
 from typing import List, Set, Dict, Tuple, Optional
+listexample1 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+listexample2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,0,2,2]]
+listexample3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+def give_instructions() -&gt; None:
+    &#34;&#34;&#34;Gives out the instructions to the player
+    &#34;&#34;&#34;
+    print(&#34;Üdvözöllek a 2048-as játékban, a aprancsok a következők: &#34;)
+    print(&#34;w-fel/a-balra/s-le/d-jobbra/store-kimentés,befejezés&#34;)
+    print(&#34;a játék kimenti ahol állsz ha az end parancsot nyomod meg, sok szerencsét&#34;)
+    print(&#34;Add meg a parncsot&#34;)
 
+def writescore(map:list) -&gt; None:
+    &#34;&#34;&#34;This will print out the score
+
+    Args:
+        map (list): The map used to calculate the score
+    &#34;&#34;&#34;
+    print(&#34;Your current score is: {}&#34;.format(alapok.score(map)))
 
 def start() -&gt; None:
-    &#34;&#34;&#34;This will generate the map, or saves in the map from allas.txt if it exists.
+    &#34;&#34;&#34;This will load a new map, or loads in the map from allas.txt if it exists.
 
     Returns:
         None: This justs prints the table
     &#34;&#34;&#34;
-    map = alapok.betoltes(&#34;állás.txt&#34;)
+    give_instructions()
+    map = load(&#34;allas.txt&#34;)
     alapok.mapprint(map)
-    scoring.writescore(map, scoring.score(map))
+    writescore(map)
     return map
 
-def up(map:list) -&gt; list:
-    &#34;&#34;&#34;The function to move up and handle the state t´where the player is at right now
+def get_current_state(map:list) -&gt; None:
+    &#34;&#34;&#34;This function will check what happens to the map after a command has been given out. Did the player lose, did the player win, etc...
 
     Args:
-        map (list): The map u want to change and handle
-
-    Returns:
-        list: the changed version of the map
+        map (list): [description]
     &#34;&#34;&#34;
-    map = alapok.move_up(map)
     if alapok.win(map) == True:
         print(&#34;You have Won! Congratulations!&#34;)
         sys.exit()
     elif alapok.lose(map) == True:
         print(&#34;You have Lost!&#34;)
         sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
+    elif alapok.is_there_zero(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
         alapok.mapprint(map)
         print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
-
+        writescore(map)
     else:
         alapok.give_new_2(map)
         alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
+        writescore(map)
 
-    return map
+def save(map:list, score:int) -&gt; None:
+    &#34;&#34;&#34;This will save the map and the score u are currently at
+    &#34;&#34;&#34;
+    import json
+    file = open(&#34;allas.txt&#34;,&#34;w&#34;)
+    data = {
+        &#34;map&#34;: map,
+        &#34;score&#34;: score,
+    }
+    json.dump(data, file)
+    file.close()
 
-def down(map:list) -&gt; list:
-    &#34;&#34;&#34;The function that moves down the map and gets the state of the game
-
-    Args:
-        map (list): the map u want to investigate
+def load(filename:str) -&gt; list:
+    &#34;&#34;&#34;This will load the data that you have saved
 
     Returns:
-        list: The changed map
+        list: the saved list
     &#34;&#34;&#34;
-    map = alapok.move_down(map)
-    if alapok.win(map) == True:
-        print(&#34;You have Won! Congratulations!&#34;)
-        sys.exit()
-    elif alapok.lose(map) == True:
-        print(&#34;You have Lost!&#34;)
-        sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
-        alapok.mapprint(map)
-        print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
-    else:
-        alapok.give_new_2(map)
-        alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
-
+    import json
+    try:
+        file = open(filename,&#34;r&#34;)
+        data = json.load(file)
+        global map
+        global score
+        map = data[&#34;map&#34;]
+        score = data[&#34;score&#34;]
+        file.close()
+    except:
+        map = alapok.set_table()
+        score = 0
     return map
 
-def left(map:list) -&gt; list:
-    &#34;&#34;&#34;The map that handles the move down command, and gets the state of the game
-
-    Args:
-        map (list): The map u want to change
+def getcommand() -&gt; str:
+    &#34;&#34;&#34;The function to get the command
 
     Returns:
-        list: ´The changed map
+        str: The command
+    &gt;&gt;&gt; getcommand()
+    s
     &#34;&#34;&#34;
-    map = alapok.move_left(map)
-    if alapok.win(map) == True:
-        print(&#34;You have Won! Congratulations!&#34;)
-        sys.exit()
-    elif alapok.lose(map) == True:
-        print(&#34;You have Lost!&#34;)
-        sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
-        alapok.mapprint(map)
-        print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
-    else:
-        alapok.give_new_2(map)
-        alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
-    return map
+    command = input(&#34;Adj meg egy parancsot! &#34;)
+    return command
 
-def right(map:list) -&gt; list:
-    &#34;&#34;&#34;The function that handles the move right command and gets the state of the game
-
-    Args:
-        map (list): The map u want to change
-
-    Returns:
-        list: The changed state of the game
-    &#34;&#34;&#34;
-    map = alapok.move_right(map)
-    if alapok.win(map) == True:
-        print(&#34;You have Won! Congratulations!&#34;)
-        sys.exit()
-    elif alapok.lose(map) == True:
-        print(&#34;You have Lost!&#34;)
-        sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
-        alapok.mapprint(map)
-        print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
-    else:
-        alapok.give_new_2(map)
-        alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
-    return map
-
-def save(score:int,map:list) -&gt; None:
-    &#34;&#34;&#34;The function that saves the score and map
-
-    Args:
-        score (int): The score u want to save
-        map (list): The map u want to save
-    &#34;&#34;&#34;
-    score = scoring.score(map)
-    alapok.mentes(map, score)
-
-def badcommand() -&gt; str:
+def bad_command() -&gt; str:
     &#34;&#34;&#34;If you entered a bad command and error message will pop up
 
     Returns:
-        str: An error mesage
+        str: An error message
     &#34;&#34;&#34;
     print(&#34;Rossz gomb&#34;)
+
+
 
 def basics(command:str,map:list) -&gt; list:
     &#34;&#34;&#34;This will handle every single command and what happens after that
@@ -180,24 +146,29 @@ def basics(command:str,map:list) -&gt; list:
         list: The changed map
     &#34;&#34;&#34;
     if command == &#34;w&#34;:
-        map = up(map)
+        map = alapok.move_up(map)
+        get_current_state(map)
     elif command == &#34;s&#34;:
-        map = down(map)
+        map = alapok.move_down(map)
+        get_current_state(map)
     elif command == &#34;a&#34;:
-        map = left(map)
+        map = alapok.move_left(map)
+        get_current_state(map)
     elif command == &#34;d&#34;:
-        map = right(map)
+        map = alapok.move_right(map)
+        get_current_state(map)
     elif command == &#34;save&#34;:
-        score = scoring.score(map)
-        save(score,map)
+        score = alapok.score(map)
+        save(map,score)
     else:
-        badcommand()
+        bad_command()
     return map
 
 def main() -&gt; None:
     &#34;&#34;&#34;Generates the map, and also handles the basic function
     &#34;&#34;&#34;
     map = start()
+    
 
     while(True):
         command = alapok.getcommand()
@@ -211,25 +182,25 @@ def main() -&gt; None:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="game.badcommand"><code class="name flex">
-<span>def <span class="ident">badcommand</span></span>(<span>) ‑> str</span>
+<dt id="game.bad_command"><code class="name flex">
+<span>def <span class="ident">bad_command</span></span>(<span>) ‑> str</span>
 </code></dt>
 <dd>
 <div class="desc"><p>If you entered a bad command and error message will pop up</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>str</code></dt>
-<dd>An error mesage</dd>
+<dd>An error message</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def badcommand() -&gt; str:
+<pre><code class="python">def bad_command() -&gt; str:
     &#34;&#34;&#34;If you entered a bad command and error message will pop up
 
     Returns:
-        str: An error mesage
+        str: An error message
     &#34;&#34;&#34;
     print(&#34;Rossz gomb&#34;)</code></pre>
 </details>
@@ -266,111 +237,140 @@ def main() -&gt; None:
         list: The changed map
     &#34;&#34;&#34;
     if command == &#34;w&#34;:
-        map = up(map)
+        map = alapok.move_up(map)
+        get_current_state(map)
     elif command == &#34;s&#34;:
-        map = down(map)
+        map = alapok.move_down(map)
+        get_current_state(map)
     elif command == &#34;a&#34;:
-        map = left(map)
+        map = alapok.move_left(map)
+        get_current_state(map)
     elif command == &#34;d&#34;:
-        map = right(map)
+        map = alapok.move_right(map)
+        get_current_state(map)
     elif command == &#34;save&#34;:
-        score = scoring.score(map)
-        save(score,map)
+        score = alapok.score(map)
+        save(map,score)
     else:
-        badcommand()
+        bad_command()
     return map</code></pre>
 </details>
 </dd>
-<dt id="game.down"><code class="name flex">
-<span>def <span class="ident">down</span></span>(<span>map: list) ‑> list</span>
+<dt id="game.get_current_state"><code class="name flex">
+<span>def <span class="ident">get_current_state</span></span>(<span>map: list) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>The function that moves down the map and gets the state of the game</p>
+<div class="desc"><p>This function will check what happens to the map after a command has been given out. Did the player lose, did the player win, etc&hellip;</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>the map u want to investigate</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>list</code></dt>
-<dd>The changed map</dd>
+<dd>[description]</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def down(map:list) -&gt; list:
-    &#34;&#34;&#34;The function that moves down the map and gets the state of the game
+<pre><code class="python">def get_current_state(map:list) -&gt; None:
+    &#34;&#34;&#34;This function will check what happens to the map after a command has been given out. Did the player lose, did the player win, etc...
 
     Args:
-        map (list): the map u want to investigate
-
-    Returns:
-        list: The changed map
+        map (list): [description]
     &#34;&#34;&#34;
-    map = alapok.move_down(map)
     if alapok.win(map) == True:
         print(&#34;You have Won! Congratulations!&#34;)
         sys.exit()
     elif alapok.lose(map) == True:
         print(&#34;You have Lost!&#34;)
         sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
+    elif alapok.is_there_zero(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
         alapok.mapprint(map)
         print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
+        writescore(map)
     else:
         alapok.give_new_2(map)
         alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
-
-    return map</code></pre>
+        writescore(map)</code></pre>
 </details>
 </dd>
-<dt id="game.left"><code class="name flex">
-<span>def <span class="ident">left</span></span>(<span>map: list) ‑> list</span>
+<dt id="game.getcommand"><code class="name flex">
+<span>def <span class="ident">getcommand</span></span>(<span>) ‑> str</span>
 </code></dt>
 <dd>
-<div class="desc"><p>The map that handles the move down command, and gets the state of the game</p>
-<h2 id="args">Args</h2>
+<div class="desc"><p>The function to get the command</p>
+<h2 id="returns">Returns</h2>
 <dl>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u want to change</dd>
+<dt><code>str</code></dt>
+<dd>The command</dd>
 </dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; getcommand()
+s
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getcommand() -&gt; str:
+    &#34;&#34;&#34;The function to get the command
+
+    Returns:
+        str: The command
+    &gt;&gt;&gt; getcommand()
+    s
+    &#34;&#34;&#34;
+    command = input(&#34;Adj meg egy parancsot! &#34;)
+    return command</code></pre>
+</details>
+</dd>
+<dt id="game.give_instructions"><code class="name flex">
+<span>def <span class="ident">give_instructions</span></span>(<span>) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Gives out the instructions to the player</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def give_instructions() -&gt; None:
+    &#34;&#34;&#34;Gives out the instructions to the player
+    &#34;&#34;&#34;
+    print(&#34;Üdvözöllek a 2048-as játékban, a aprancsok a következők: &#34;)
+    print(&#34;w-fel/a-balra/s-le/d-jobbra/store-kimentés,befejezés&#34;)
+    print(&#34;a játék kimenti ahol állsz ha az end parancsot nyomod meg, sok szerencsét&#34;)
+    print(&#34;Add meg a parncsot&#34;)</code></pre>
+</details>
+</dd>
+<dt id="game.load"><code class="name flex">
+<span>def <span class="ident">load</span></span>(<span>filename: str) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This will load the data that you have saved</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>list</code></dt>
-<dd>´The changed map</dd>
+<dd>the saved list</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def left(map:list) -&gt; list:
-    &#34;&#34;&#34;The map that handles the move down command, and gets the state of the game
-
-    Args:
-        map (list): The map u want to change
+<pre><code class="python">def load(filename:str) -&gt; list:
+    &#34;&#34;&#34;This will load the data that you have saved
 
     Returns:
-        list: ´The changed map
+        list: the saved list
     &#34;&#34;&#34;
-    map = alapok.move_left(map)
-    if alapok.win(map) == True:
-        print(&#34;You have Won! Congratulations!&#34;)
-        sys.exit()
-    elif alapok.lose(map) == True:
-        print(&#34;You have Lost!&#34;)
-        sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
-        alapok.mapprint(map)
-        print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
-    else:
-        alapok.give_new_2(map)
-        alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
+    import json
+    try:
+        file = open(filename,&#34;r&#34;)
+        data = json.load(file)
+        global map
+        global score
+        map = data[&#34;map&#34;]
+        score = data[&#34;score&#34;]
+        file.close()
+    except:
+        map = alapok.set_table()
+        score = 0
     return map</code></pre>
 </details>
 </dd>
@@ -387,90 +387,40 @@ def main() -&gt; None:
     &#34;&#34;&#34;Generates the map, and also handles the basic function
     &#34;&#34;&#34;
     map = start()
+    
 
     while(True):
         command = alapok.getcommand()
         map = basics(command,map)</code></pre>
 </details>
 </dd>
-<dt id="game.right"><code class="name flex">
-<span>def <span class="ident">right</span></span>(<span>map: list) ‑> list</span>
-</code></dt>
-<dd>
-<div class="desc"><p>The function that handles the move right command and gets the state of the game</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u want to change</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>list</code></dt>
-<dd>The changed state of the game</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def right(map:list) -&gt; list:
-    &#34;&#34;&#34;The function that handles the move right command and gets the state of the game
-
-    Args:
-        map (list): The map u want to change
-
-    Returns:
-        list: The changed state of the game
-    &#34;&#34;&#34;
-    map = alapok.move_right(map)
-    if alapok.win(map) == True:
-        print(&#34;You have Won! Congratulations!&#34;)
-        sys.exit()
-    elif alapok.lose(map) == True:
-        print(&#34;You have Lost!&#34;)
-        sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
-        alapok.mapprint(map)
-        print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
-    else:
-        alapok.give_new_2(map)
-        alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
-    return map</code></pre>
-</details>
-</dd>
 <dt id="game.save"><code class="name flex">
-<span>def <span class="ident">save</span></span>(<span>score: int, map: list) ‑> NoneType</span>
+<span>def <span class="ident">save</span></span>(<span>map: list, score: int) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>The function that saves the score and map</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>score</code></strong> :&ensp;<code>int</code></dt>
-<dd>The score u want to save</dd>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u want to save</dd>
-</dl></div>
+<div class="desc"><p>This will save the map and the score u are currently at</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def save(score:int,map:list) -&gt; None:
-    &#34;&#34;&#34;The function that saves the score and map
-
-    Args:
-        score (int): The score u want to save
-        map (list): The map u want to save
+<pre><code class="python">def save(map:list, score:int) -&gt; None:
+    &#34;&#34;&#34;This will save the map and the score u are currently at
     &#34;&#34;&#34;
-    score = scoring.score(map)
-    alapok.mentes(map, score)</code></pre>
+    import json
+    file = open(&#34;allas.txt&#34;,&#34;w&#34;)
+    data = {
+        &#34;map&#34;: map,
+        &#34;score&#34;: score,
+    }
+    json.dump(data, file)
+    file.close()</code></pre>
 </details>
 </dd>
 <dt id="game.start"><code class="name flex">
 <span>def <span class="ident">start</span></span>(<span>) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This will generate the map, or saves in the map from allas.txt if it exists.</p>
+<div class="desc"><p>This will load a new map, or loads in the map from allas.txt if it exists.</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>None</code></dt>
@@ -481,63 +431,39 @@ def main() -&gt; None:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def start() -&gt; None:
-    &#34;&#34;&#34;This will generate the map, or saves in the map from allas.txt if it exists.
+    &#34;&#34;&#34;This will load a new map, or loads in the map from allas.txt if it exists.
 
     Returns:
         None: This justs prints the table
     &#34;&#34;&#34;
-    map = alapok.betoltes(&#34;állás.txt&#34;)
+    give_instructions()
+    map = load(&#34;allas.txt&#34;)
     alapok.mapprint(map)
-    scoring.writescore(map, scoring.score(map))
+    writescore(map)
     return map</code></pre>
 </details>
 </dd>
-<dt id="game.up"><code class="name flex">
-<span>def <span class="ident">up</span></span>(<span>map: list) ‑> list</span>
+<dt id="game.writescore"><code class="name flex">
+<span>def <span class="ident">writescore</span></span>(<span>map: list) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>The function to move up and handle the state t´where the player is at right now</p>
+<div class="desc"><p>This will print out the score</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u want to change and handle</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>list</code></dt>
-<dd>the changed version of the map</dd>
+<dd>The map used to calculate the score</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def up(map:list) -&gt; list:
-    &#34;&#34;&#34;The function to move up and handle the state t´where the player is at right now
+<pre><code class="python">def writescore(map:list) -&gt; None:
+    &#34;&#34;&#34;This will print out the score
 
     Args:
-        map (list): The map u want to change and handle
-
-    Returns:
-        list: the changed version of the map
+        map (list): The map used to calculate the score
     &#34;&#34;&#34;
-    map = alapok.move_up(map)
-    if alapok.win(map) == True:
-        print(&#34;You have Won! Congratulations!&#34;)
-        sys.exit()
-    elif alapok.lose(map) == True:
-        print(&#34;You have Lost!&#34;)
-        sys.exit()
-    elif alapok.vanenulla(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
-        alapok.mapprint(map)
-        print(&#34;erre nem tudsz már lépni de másik irányba igen&#34;)
-        scoring.writescore(map, scoring.score(map))
-
-    else:
-        alapok.give_new_2(map)
-        alapok.mapprint(map)
-        scoring.writescore(map, scoring.score(map))
-
-    return map</code></pre>
+    print(&#34;Your current score is: {}&#34;.format(alapok.score(map)))</code></pre>
 </details>
 </dd>
 </dl>
@@ -553,15 +479,16 @@ def main() -&gt; None:
 <ul id="index">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="two-column">
-<li><code><a title="game.badcommand" href="#game.badcommand">badcommand</a></code></li>
+<li><code><a title="game.bad_command" href="#game.bad_command">bad_command</a></code></li>
 <li><code><a title="game.basics" href="#game.basics">basics</a></code></li>
-<li><code><a title="game.down" href="#game.down">down</a></code></li>
-<li><code><a title="game.left" href="#game.left">left</a></code></li>
+<li><code><a title="game.get_current_state" href="#game.get_current_state">get_current_state</a></code></li>
+<li><code><a title="game.getcommand" href="#game.getcommand">getcommand</a></code></li>
+<li><code><a title="game.give_instructions" href="#game.give_instructions">give_instructions</a></code></li>
+<li><code><a title="game.load" href="#game.load">load</a></code></li>
 <li><code><a title="game.main" href="#game.main">main</a></code></li>
-<li><code><a title="game.right" href="#game.right">right</a></code></li>
 <li><code><a title="game.save" href="#game.save">save</a></code></li>
 <li><code><a title="game.start" href="#game.start">start</a></code></li>
-<li><code><a title="game.up" href="#game.up">up</a></code></li>
+<li><code><a title="game.writescore" href="#game.writescore">writescore</a></code></li>
 </ul>
 </li>
 </ul>

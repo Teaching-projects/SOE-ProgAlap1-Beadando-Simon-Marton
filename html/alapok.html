@@ -29,28 +29,34 @@
 <pre><code class="python">from typing import List, Set, Dict, Tuple, Optional
 import json
 import random
+listexample1 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
+listexample2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,0,2,2]]
+listexample3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
 
 def mapprint(map:list) -&gt; None:
     &#34;&#34;&#34;The function that prints out the map
 
     Args:
         map (list): The map that is given here will be printed out
+
+    &gt;&gt;&gt; mapprint(listexample1)
+    [2, 2, 2, 2]
+    [2, 2, 2, 2]
+    [0, 0, 0, 0]
+    [0, 0, 0, 0]
+    &gt;&gt;&gt; mapprint(listexapmle2)
+    [2, 2, 2, 2]
+    [16, 16, 16, 16]
+    [4, 4, 4, 4]
+    [2, 2, 2, 2]
+    &gt;&gt;&gt; mapprint(listexample3)
+    [8, 8, 8, 8]
+    [8, 8, 8, 8]
+    [0, 0, 0, 0]
+    [2, 2, 2, 2048]
     &#34;&#34;&#34;
     for i in range(4):
         print(map[i])
-
-#test
-
-#lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-#lista2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,2,2,2]]
-#lista3 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-#lista4 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
-#lista5 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-#print(mapprint(lista))
-#print(mapprint(lista2))
-#print(mapprint(lista3))
-#print(mapprint(lista4))
-#print(mapprint(lista5))
 
 
 def give_new_2(map:list) -&gt; None:
@@ -58,48 +64,35 @@ def give_new_2(map:list) -&gt; None:
 
     Args:
         map (list): The map that u want to use
+    &gt;&gt;&gt; give_new_2(listexample1)
+    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [2, 0, 0, 0]]
+    &gt;&gt;&gt; give_new_2(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 2]]
     &#34;&#34;&#34;
     sor = random.randint(0,3)
     oszlop = random.randint(0,3)
-    if map[sor][oszlop] == 0:
-        map[sor][oszlop] = 2
-    else:
-        while map[sor][oszlop] != 0:
-            sor = random.randint(0,3)
-            oszlop = random.randint(0,3)
-        map[sor][oszlop] = 2
-#test
-#lista = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-#lista2 = [[0,0,0,0],[2,2,2,2],[2,2,2,2],[0,0,0,0]]
-#lista3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-#give_new_2(lista)
-#give_new_2(lista2)
-#give_new_2(lista3)
-#print(lista)
-#print(lista2)
-#print(lista3)
+    while map[sor][oszlop] != 0:
+        sor = random.randint(0,3)
+        oszlop = random.randint(0,3)
+    map[sor][oszlop] = 2
 
-
-def set_table():
+def set_table() -&gt; None:
     &#34;&#34;&#34;This is the start of everything, this will generate the first table, with a 2 in a random  place
 
     Returns:
         None: This returns nothing, only prints out the table
+    
+    &gt;&gt;&gt; set_table()
+    [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 2, 0]]
     &#34;&#34;&#34;
     map = []
     for i in range(4):
         sor = [0]*4
         map.append(sor)
 
-    print(&#34;Üdvözöllek a 2048-as játékban, a aprancsok a következők: &#34;)
-    print(&#34;w-fel/a-balra/s-le/d-jobbra/save-kimentés,befejezés&#34;)
-    print(&#34;a játék kimenti ahol állsz ha az end parancsot nyomod meg, sok szerencsét&#34;)
-    print(&#34;Add meg a parncsot&#34;)
     give_new_2(map)
 
     return map
-#test
-#print(set_table())
 
 def win(map:list) -&gt; bool:
     &#34;&#34;&#34;The function that will check if you have won yet or not
@@ -109,6 +102,12 @@ def win(map:list) -&gt; bool:
 
     Returns:
         bool: Will give a true if you have won and a false if you haven&#39;t won&#39;
+    &gt;&gt;&gt; win(listexample1)
+    False
+    &gt;&gt;&gt; win(listexample2)
+    False
+    &gt;&gt;&gt; win(listexample3)
+    True
     &#34;&#34;&#34;
     for i in range(4):
         for j in range(4):
@@ -116,22 +115,23 @@ def win(map:list) -&gt; bool:
                 return True
     
     return False
-#test
-
-#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]] -&gt; True
-#lista2 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,0]] -&gt; False
-#print(win(lista))
-#print(win(lista2))
 
 
-def horizontal_move_exists(map:list) -&gt; bool:
-    &#34;&#34;&#34;This is used in the lose function and checks if you can move horizontally
+def can_it_merge_horizontally(map:list) -&gt; bool:
+    &#34;&#34;&#34;This is used in the lose function and checks if you can merge horizontally or not
 
     Args:
         map (list): it checks in this map
 
     Returns:
         bool: Return a True if you can, a false if you can&#39;t
+    
+    &gt;&gt;&gt; can_it_merge_horizontally(listexample1)
+    True
+    &gt;&gt;&gt; can_it_merge_horizontally(listexample2)
+    True
+    &gt;&gt;&gt; can_it_merge_horizontally(listexample3)
+    True
     &#34;&#34;&#34;
     for i in range(len(map)):
         for j in range(len(map[i])-1):
@@ -139,19 +139,22 @@ def horizontal_move_exists(map:list) -&gt; bool:
                 return True
     
     return False
-#test
-#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-#print(horizontal_move_exists(lista))
 
 
-def vertical_move_exists(map:list) -&gt; bool:
-    &#34;&#34;&#34;This will check if you can move vertically or not, also used in the lose function
+def can_it_merge_vertically(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks whether you can merge vertically or not
 
     Args:
-        map (list): The map u checking in
+        map (list): The list u want to check
 
     Returns:
-        bool: Return a True if you can, a false if you can&#39;t
+        bool: Rteurn a true if you can a false otherwise
+    &gt;&gt;&gt; can_it_merge_vertically(listexample1)
+    True
+    &gt;&gt;&gt; can_it_merge_vertically(listexample2)
+    False
+    &gt;&gt;&gt; can_it_merge_vertically(listexample3)
+    True
     &#34;&#34;&#34;
     for i in range(len(map)-1):
         for j in range(len(map[i])):
@@ -159,10 +162,28 @@ def vertical_move_exists(map:list) -&gt; bool:
                 return True
     
     return False
-#test
-#lista = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-#print(vertical_move_exists(lista))
 
+def is_there_zero(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks if there is a 0 on the map
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: True if there is a 0 on the map and false otherwise
+    &gt;&gt;&gt; is_there_zero(listexample1)
+    True
+    &gt;&gt;&gt; is_there_zero(listexample2)
+    True
+    &gt;&gt;&gt; is_there_zero(listexample3)
+    True
+    &#34;&#34;&#34;
+    nulla = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 0:
+                return True
+    return False
 
 def lose(map:list) -&gt; bool:
     &#34;&#34;&#34;This function checks if you have lost or not. If there isnt any 0-s and you cant move vertically or horizontally, you have lost
@@ -172,53 +193,36 @@ def lose(map:list) -&gt; bool:
 
     Returns:
         bool: Return a True if you Lost, a false if you didnt&#39;
+    
+    &gt;&gt;&gt; lose(listexample1)
+    False
+    &gt;&gt;&gt; lose(listexample2)
+    False
+    &gt;&gt;&gt; lose(listexample3)
+    False
     &#34;&#34;&#34;
-    nulla = 0
-    for i in range(len(map)):
-        for j in range(len(map[i])):
-            if map[i][j] == 0:
-                nulla += 1
-    if nulla == 0 and (vertical_move_exists(map) == False and horizontal_move_exists(map) == False):
+    if not is_there_zero(map) and not can_it_merge_vertically(map) and not can_it_merge_horizontally(map):
         return True
     else:
         return False
-#test
-#lista = [[2,4,256,2],[4,8,16,64],[16,32,512,1024],[256,16,4,64]]
-#lista1 = [[8,8,8,8],[8,8,8,8],[8,4,8,4],[2,16,2,2]]
-#lista2 = [[8,8,8,8],[8,8,8,8],[32,64,32,64],[2,8,2,16]]
-#lista3 = [[8,8,8,8],[8,8,8,8],[1024,2,4,16],[2,16,2,16]]
-#lista4 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,16,2,16]]
-#print(mapprint(lista))
-#print(lose(lista))
-#print(lose(lista1))
-#print(lose(lista2))
-#print(lose(lista3))
-#print(lose(lista4))
 
-def vanenulla(map:list) -&gt; bool:
-    &#34;&#34;&#34;This function checks if there is a 0 on the map
 
-    Args:
-        map (list): The map u are checking in
 
-    Returns:
-        bool: True if there is a 0 on the map and false otherwise
-    &#34;&#34;&#34;
-    nulla = 0
-    for i in range(len(map)):
-        for j in range(len(map[i])):
-            if map[i][j] == 0:
-                return True
-    return False
-
-def osszehuzas(map:list) -&gt; list:
-    &#34;&#34;&#34;This function will pull the numbers in the map together
+def pull_together(map:list) -&gt; list:
+    &#34;&#34;&#34;This function will reutrn a new map, that is basically the same, but has no zeros inbetween the numbers
 
     Args:
         map (list): The map u are using
 
     Returns:
         list: The pulled form of the map
+    
+    &gt;&gt;&gt; pull_together(listexample1)
+    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; pull_together(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 0]]
+    &gt;&gt;&gt; pull_together(listexample3)
+    [[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2, 2, 2, 2048]]
     &#34;&#34;&#34;
     new_map = []
 
@@ -233,21 +237,22 @@ def osszehuzas(map:list) -&gt; list:
                 pos += 1
                 
     return new_map
-#test
-#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(osszehuzas(lista))
-#print(osszehuzas(lista2))
 
 
-def osszegez(map:list) -&gt; list:
-    &#34;&#34;&#34;It will add the numbers together, and puts a ^on the second part
+def merge(map:list) -&gt; list:
+    &#34;&#34;&#34;It will add the numbers together always in left direction, and will use other functions to get other directions done
 
     Args:
         map (list): The map u are checking in
 
     Returns:
         list: The added map
+    &gt;&gt;&gt; merge(listexample1)
+    [[4, 0, 4, 0], [4, 0, 4, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; merge(listexample2)
+    [[4, 0, 4, 0], [32, 0, 32, 0], [8, 0, 8, 0], [2, 0, 4, 0]]
+    &gt;&gt;&gt; merge(listexample3)
+    [[16, 0, 16, 0], [16, 0, 16, 0], [0, 0, 0, 0], [4, 0, 2, 2048]]
     &#34;&#34;&#34;
     for i in range(len(map)):
         for j in range(len(map[i])- 1):
@@ -256,13 +261,9 @@ def osszegez(map:list) -&gt; list:
                 map[i][j + 1] = 0
     
     return map
-#test
-#lista = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(osszegez(lista)), az output:
-#[[2, 0, 4, 0], [4, 0, 0, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
 
 
-def sorvaltas(map:list) -&gt; list:
+def reverse(map:list) -&gt; list:
     &#34;&#34;&#34;
     This will reverse the map
 
@@ -271,6 +272,12 @@ def sorvaltas(map:list) -&gt; list:
 
     Returns:
         list: The reversed version of map
+    &gt;&gt;&gt; reverse(listexample1)
+    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; reverse(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 0, 2]]
+    &gt;&gt;&gt; reverse(listexample3)
+    [[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2048, 2, 2, 2]] 
     &#34;&#34;&#34;
     new_map = []
     for i in range(4):
@@ -279,13 +286,8 @@ def sorvaltas(map:list) -&gt; list:
             new_map[i].append(map[i][3-j])
 
     return new_map
-#test
-#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(sorvaltas(lista))
-#print(sorvaltas(lista2))
 
-def mapforditas(map:list) -&gt; list:
+def transpose(map:list) -&gt; list:
     &#34;&#34;&#34;This will interchange the maps coluumns and rows
 
     Args:
@@ -293,6 +295,12 @@ def mapforditas(map:list) -&gt; list:
 
     Returns:
         list: The interchanged version of the map
+    &gt;&gt;&gt; transpose(listexample1)
+    [[2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0]]
+    &gt;&gt;&gt; transpose(listexample2)
+    [[2, 16, 4, 2], [2, 16, 4, 0], [2, 16, 4, 2], [2, 16, 4, 2]]
+    &gt;&gt;&gt; transpose(listexample3)
+    [[8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2048]]
     &#34;&#34;&#34;
     new_map = []
     for i in range(4):
@@ -301,13 +309,8 @@ def mapforditas(map:list) -&gt; list:
             new_map[i].append(map[j][i])
     
     return new_map
-#test
-#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(mapforditas(lista))
-#print(mapforditas(lista2))
 
-def mentes(map:list, score:int) -&gt; None:
+def save(map:list, score:int) -&gt; None:
     &#34;&#34;&#34;This will save the map and the score u are currently at
     &#34;&#34;&#34;
     import json
@@ -319,7 +322,7 @@ def mentes(map:list, score:int) -&gt; None:
     json.dump(data, file)
     file.close()
 
-def betoltes(filename:str) -&gt; list:
+def load(filename:str) -&gt; list:
     &#34;&#34;&#34;This will load the data that you have saved
 
     Returns:
@@ -344,11 +347,38 @@ def getcommand() -&gt; str:
 
     Returns:
         str: The command
+    &gt;&gt;&gt; getcommand()
+    s
     &#34;&#34;&#34;
     command = input(&#34;Adj meg egy parancsot! &#34;)
     return command
-#Test
-#print(getcommand())
+
+def score(map:list) -&gt; int:
+    &#34;&#34;&#34;The function that calculates the score that the player has. First it calculates every number that is on the table, than the value gets multiplied by 10
+
+    Args:
+        map (list): The map
+
+    Returns:
+        int: The claculated score
+    &#34;&#34;&#34;
+    allscore = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            tempscore = map[i][j] * 10
+            allscore += tempscore
+    
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 1024:
+                allscore += 500
+    
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 2048:
+                allscore += 1000
+                
+    return allscore
 
 def move_left(map:list) -&gt; list:
     &#34;&#34;&#34;The function to handle the left moving command. First u pull the map together, than add the numbers, then pull again
@@ -358,16 +388,18 @@ def move_left(map:list) -&gt; list:
 
     Returns:
         list: the changed map
+
+    &gt;&gt;&gt; move_left(listexample1)
+    [[4, 4, 0, 0], [4, 4, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; move_left(listexample2)
+    [[4, 4, 0, 0], [32, 32, 0, 0], [8, 8, 0, 0], [4, 2, 0, 0]]
+    &gt;&gt;&gt; move_left(listexample3)
+    [[16, 16, 0, 0], [16, 16, 0, 0], [0, 0, 0, 0], [4, 2, 2048, 0]]
     &#34;&#34;&#34;
-    new_map = osszehuzas(map)
-    new_map = osszegez(new_map)
-    new_map = osszehuzas(new_map)
+    new_map = pull_together(map)
+    new_map = merge(new_map)
+    new_map = pull_together(new_map)
     return new_map
-#test
-#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(move_left(lista))
-#print(move_left(lista2))
 
 
 def move_right(map:list) -&gt; list:
@@ -378,16 +410,18 @@ def move_right(map:list) -&gt; list:
 
     Returns:
         list: The changed version of the map
+
+    &gt;&gt;&gt; move_right(listexample1)
+    [[0, 0, 4, 4], [0, 0, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; move_right(listexample2)
+    [[0, 0, 4, 4], [0, 0, 32, 32], [0, 0, 8, 8], [0, 0, 2, 4]]
+    &gt;&gt;&gt; move_right(listexample3)
+    [[0, 0, 16, 16], [0, 0, 16, 16], [0, 0, 0, 0], [0, 2, 4, 2048]]
     &#34;&#34;&#34;
-    new_map = sorvaltas(map)
+    new_map = reverse(map)
     new_map = move_left(new_map)
-    new_map = sorvaltas(new_map)
+    new_map = reverse(new_map)
     return new_map
-#test
-#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(move_right(lista))
-#print(move_right(lista2))
 
 
 def move_up(map:list) -&gt; list:
@@ -398,16 +432,18 @@ def move_up(map:list) -&gt; list:
 
     Returns:
         list: The changed map
+
+    &gt;&gt;&gt; move_up(listexample1)
+    [[4, 4, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; move_up(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 0, 2, 2]]
+    &gt;&gt;&gt; move_up(listexample3)
+    [[16, 16, 16, 16], [2, 2, 2, 2048], [0, 0, 0, 0], [0, 0, 0, 0]]
     &#34;&#34;&#34;
-    new_map = mapforditas(map)
+    new_map = transpose(map)
     new_map = move_left(new_map)
-    new_map = mapforditas(new_map)
+    new_map = transpose(new_map)
     return new_map
-#test
-#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(move_up(lista))
-#print(move_up(lista2))
 
 def move_down(map:list) -&gt; list:
     &#34;&#34;&#34;The function that handles the move down command, nfirst u interchange the map, than u move right, than u interchange again to get the default map
@@ -417,16 +453,17 @@ def move_down(map:list) -&gt; list:
 
     Returns:
         list: The changed map
+    &gt;&gt;&gt; move_down(listexample1)
+    [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [4, 4, 4, 4]]
+    &gt;&gt;&gt; move_down(listexample2)
+    [[2, 0, 2, 2], [16, 2, 16, 16], [4, 16, 4, 4], [2, 4, 2, 2]]
+    &gt;&gt;&gt; move_down(listexample3)
+    [[0, 0, 0, 0], [0, 0, 0, 0], [16, 16, 16, 16], [2, 2, 2, 2048]]
     &#34;&#34;&#34;
-    new_map = mapforditas(map)
+    new_map = transpose(map)
     new_map = move_right(new_map)
-    new_map = mapforditas(new_map)
-    return new_map
-#test
-#lista = [[8,8,0,8],[8,8,0,8],[0,0,0,0],[2,2,2,0]]
-#lista2 = [[2,0,2,2],[2,2,0,2],[0,0,0,0],[0,0,0,0]]
-#print(move_down(lista))
-#print(move_down(lista2))</code></pre>
+    new_map = transpose(new_map)
+    return new_map</code></pre>
 </details>
 </section>
 <section>
@@ -436,8 +473,222 @@ def move_down(map:list) -&gt; list:
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="alapok.betoltes"><code class="name flex">
-<span>def <span class="ident">betoltes</span></span>(<span>filename: str) ‑> list</span>
+<dt id="alapok.can_it_merge_horizontally"><code class="name flex">
+<span>def <span class="ident">can_it_merge_horizontally</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This is used in the lose function and checks if you can merge horizontally or not</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>it checks in this map</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>Return a True if you can, a false if you can't</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; can_it_merge_horizontally(listexample1)
+True
+&gt;&gt;&gt; can_it_merge_horizontally(listexample2)
+True
+&gt;&gt;&gt; can_it_merge_horizontally(listexample3)
+True
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def can_it_merge_horizontally(map:list) -&gt; bool:
+    &#34;&#34;&#34;This is used in the lose function and checks if you can merge horizontally or not
+
+    Args:
+        map (list): it checks in this map
+
+    Returns:
+        bool: Return a True if you can, a false if you can&#39;t
+    
+    &gt;&gt;&gt; can_it_merge_horizontally(listexample1)
+    True
+    &gt;&gt;&gt; can_it_merge_horizontally(listexample2)
+    True
+    &gt;&gt;&gt; can_it_merge_horizontally(listexample3)
+    True
+    &#34;&#34;&#34;
+    for i in range(len(map)):
+        for j in range(len(map[i])-1):
+            if map[i][j] == map[i][j + 1]:
+                return True
+    
+    return False</code></pre>
+</details>
+</dd>
+<dt id="alapok.can_it_merge_vertically"><code class="name flex">
+<span>def <span class="ident">can_it_merge_vertically</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function checks whether you can merge vertically or not</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The list u want to check</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>Rteurn a true if you can a false otherwise</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; can_it_merge_vertically(listexample1)
+True
+&gt;&gt;&gt; can_it_merge_vertically(listexample2)
+False
+&gt;&gt;&gt; can_it_merge_vertically(listexample3)
+True
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def can_it_merge_vertically(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks whether you can merge vertically or not
+
+    Args:
+        map (list): The list u want to check
+
+    Returns:
+        bool: Rteurn a true if you can a false otherwise
+    &gt;&gt;&gt; can_it_merge_vertically(listexample1)
+    True
+    &gt;&gt;&gt; can_it_merge_vertically(listexample2)
+    False
+    &gt;&gt;&gt; can_it_merge_vertically(listexample3)
+    True
+    &#34;&#34;&#34;
+    for i in range(len(map)-1):
+        for j in range(len(map[i])):
+            if map[i][j] == map[i + 1][j]:
+                return True
+    
+    return False</code></pre>
+</details>
+</dd>
+<dt id="alapok.getcommand"><code class="name flex">
+<span>def <span class="ident">getcommand</span></span>(<span>) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function to get the command</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>The command</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; getcommand()
+s
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getcommand() -&gt; str:
+    &#34;&#34;&#34;The function to get the command
+
+    Returns:
+        str: The command
+    &gt;&gt;&gt; getcommand()
+    s
+    &#34;&#34;&#34;
+    command = input(&#34;Adj meg egy parancsot! &#34;)
+    return command</code></pre>
+</details>
+</dd>
+<dt id="alapok.give_new_2"><code class="name flex">
+<span>def <span class="ident">give_new_2</span></span>(<span>map: list) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>A function that will put a new 2 in a random location where 0-s are present</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map that u want to use</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; give_new_2(listexample1)
+[[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [2, 0, 0, 0]]
+&gt;&gt;&gt; give_new_2(listexample2)
+[[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 2]]
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def give_new_2(map:list) -&gt; None:
+    &#34;&#34;&#34;A function that will put a new 2 in a random location where 0-s are present
+
+    Args:
+        map (list): The map that u want to use
+    &gt;&gt;&gt; give_new_2(listexample1)
+    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [2, 0, 0, 0]]
+    &gt;&gt;&gt; give_new_2(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 2]]
+    &#34;&#34;&#34;
+    sor = random.randint(0,3)
+    oszlop = random.randint(0,3)
+    while map[sor][oszlop] != 0:
+        sor = random.randint(0,3)
+        oszlop = random.randint(0,3)
+    map[sor][oszlop] = 2</code></pre>
+</details>
+</dd>
+<dt id="alapok.is_there_zero"><code class="name flex">
+<span>def <span class="ident">is_there_zero</span></span>(<span>map: list) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function checks if there is a 0 on the map</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are checking in</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True if there is a 0 on the map and false otherwise</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; is_there_zero(listexample1)
+True
+&gt;&gt;&gt; is_there_zero(listexample2)
+True
+&gt;&gt;&gt; is_there_zero(listexample3)
+True
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def is_there_zero(map:list) -&gt; bool:
+    &#34;&#34;&#34;This function checks if there is a 0 on the map
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        bool: True if there is a 0 on the map and false otherwise
+    &gt;&gt;&gt; is_there_zero(listexample1)
+    True
+    &gt;&gt;&gt; is_there_zero(listexample2)
+    True
+    &gt;&gt;&gt; is_there_zero(listexample3)
+    True
+    &#34;&#34;&#34;
+    nulla = 0
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 0:
+                return True
+    return False</code></pre>
+</details>
+</dd>
+<dt id="alapok.load"><code class="name flex">
+<span>def <span class="ident">load</span></span>(<span>filename: str) ‑> list</span>
 </code></dt>
 <dd>
 <div class="desc"><p>This will load the data that you have saved</p>
@@ -450,7 +701,7 @@ def move_down(map:list) -&gt; list:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def betoltes(filename:str) -&gt; list:
+<pre><code class="python">def load(filename:str) -&gt; list:
     &#34;&#34;&#34;This will load the data that you have saved
 
     Returns:
@@ -471,97 +722,6 @@ def move_down(map:list) -&gt; list:
     return map</code></pre>
 </details>
 </dd>
-<dt id="alapok.getcommand"><code class="name flex">
-<span>def <span class="ident">getcommand</span></span>(<span>) ‑> str</span>
-</code></dt>
-<dd>
-<div class="desc"><p>The function to get the command</p>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>str</code></dt>
-<dd>The command</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def getcommand() -&gt; str:
-    &#34;&#34;&#34;The function to get the command
-
-    Returns:
-        str: The command
-    &#34;&#34;&#34;
-    command = input(&#34;Adj meg egy parancsot! &#34;)
-    return command</code></pre>
-</details>
-</dd>
-<dt id="alapok.give_new_2"><code class="name flex">
-<span>def <span class="ident">give_new_2</span></span>(<span>map: list) ‑> NoneType</span>
-</code></dt>
-<dd>
-<div class="desc"><p>A function that will put a new 2 in a random location where 0-s are present</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map that u want to use</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def give_new_2(map:list) -&gt; None:
-    &#34;&#34;&#34;A function that will put a new 2 in a random location where 0-s are present
-
-    Args:
-        map (list): The map that u want to use
-    &#34;&#34;&#34;
-    sor = random.randint(0,3)
-    oszlop = random.randint(0,3)
-    if map[sor][oszlop] == 0:
-        map[sor][oszlop] = 2
-    else:
-        while map[sor][oszlop] != 0:
-            sor = random.randint(0,3)
-            oszlop = random.randint(0,3)
-        map[sor][oszlop] = 2</code></pre>
-</details>
-</dd>
-<dt id="alapok.horizontal_move_exists"><code class="name flex">
-<span>def <span class="ident">horizontal_move_exists</span></span>(<span>map: list) ‑> bool</span>
-</code></dt>
-<dd>
-<div class="desc"><p>This is used in the lose function and checks if you can move horizontally</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>it checks in this map</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>bool</code></dt>
-<dd>Return a True if you can, a false if you can't</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def horizontal_move_exists(map:list) -&gt; bool:
-    &#34;&#34;&#34;This is used in the lose function and checks if you can move horizontally
-
-    Args:
-        map (list): it checks in this map
-
-    Returns:
-        bool: Return a True if you can, a false if you can&#39;t
-    &#34;&#34;&#34;
-    for i in range(len(map)):
-        for j in range(len(map[i])-1):
-            if map[i][j] == map[i][j + 1]:
-                return True
-    
-    return False</code></pre>
-</details>
-</dd>
 <dt id="alapok.lose"><code class="name flex">
 <span>def <span class="ident">lose</span></span>(<span>map: list) ‑> bool</span>
 </code></dt>
@@ -576,7 +736,14 @@ def move_down(map:list) -&gt; list:
 <dl>
 <dt><code>bool</code></dt>
 <dd>Return a True if you Lost, a false if you didnt'</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; lose(listexample1)
+False
+&gt;&gt;&gt; lose(listexample2)
+False
+&gt;&gt;&gt; lose(listexample3)
+False
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -589,53 +756,18 @@ def move_down(map:list) -&gt; list:
 
     Returns:
         bool: Return a True if you Lost, a false if you didnt&#39;
+    
+    &gt;&gt;&gt; lose(listexample1)
+    False
+    &gt;&gt;&gt; lose(listexample2)
+    False
+    &gt;&gt;&gt; lose(listexample3)
+    False
     &#34;&#34;&#34;
-    nulla = 0
-    for i in range(len(map)):
-        for j in range(len(map[i])):
-            if map[i][j] == 0:
-                nulla += 1
-    if nulla == 0 and (vertical_move_exists(map) == False and horizontal_move_exists(map) == False):
+    if not is_there_zero(map) and not can_it_merge_vertically(map) and not can_it_merge_horizontally(map):
         return True
     else:
         return False</code></pre>
-</details>
-</dd>
-<dt id="alapok.mapforditas"><code class="name flex">
-<span>def <span class="ident">mapforditas</span></span>(<span>map: list) ‑> list</span>
-</code></dt>
-<dd>
-<div class="desc"><p>This will interchange the maps coluumns and rows</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u are interchaning</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>list</code></dt>
-<dd>The interchanged version of the map</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def mapforditas(map:list) -&gt; list:
-    &#34;&#34;&#34;This will interchange the maps coluumns and rows
-
-    Args:
-        map (list): The map u are interchaning
-
-    Returns:
-        list: The interchanged version of the map
-    &#34;&#34;&#34;
-    new_map = []
-    for i in range(4):
-        new_map.append([])
-        for j in range(4):
-            new_map[i].append(map[j][i])
-    
-    return new_map</code></pre>
 </details>
 </dd>
 <dt id="alapok.mapprint"><code class="name flex">
@@ -647,7 +779,23 @@ def move_down(map:list) -&gt; list:
 <dl>
 <dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
 <dd>The map that is given here will be printed out</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; mapprint(listexample1)
+[2, 2, 2, 2]
+[2, 2, 2, 2]
+[0, 0, 0, 0]
+[0, 0, 0, 0]
+&gt;&gt;&gt; mapprint(listexapmle2)
+[2, 2, 2, 2]
+[16, 16, 16, 16]
+[4, 4, 4, 4]
+[2, 2, 2, 2]
+&gt;&gt;&gt; mapprint(listexample3)
+[8, 8, 8, 8]
+[8, 8, 8, 8]
+[0, 0, 0, 0]
+[2, 2, 2, 2048]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -657,31 +805,75 @@ def move_down(map:list) -&gt; list:
 
     Args:
         map (list): The map that is given here will be printed out
+
+    &gt;&gt;&gt; mapprint(listexample1)
+    [2, 2, 2, 2]
+    [2, 2, 2, 2]
+    [0, 0, 0, 0]
+    [0, 0, 0, 0]
+    &gt;&gt;&gt; mapprint(listexapmle2)
+    [2, 2, 2, 2]
+    [16, 16, 16, 16]
+    [4, 4, 4, 4]
+    [2, 2, 2, 2]
+    &gt;&gt;&gt; mapprint(listexample3)
+    [8, 8, 8, 8]
+    [8, 8, 8, 8]
+    [0, 0, 0, 0]
+    [2, 2, 2, 2048]
     &#34;&#34;&#34;
     for i in range(4):
         print(map[i])</code></pre>
 </details>
 </dd>
-<dt id="alapok.mentes"><code class="name flex">
-<span>def <span class="ident">mentes</span></span>(<span>map: list, score: int) ‑> NoneType</span>
+<dt id="alapok.merge"><code class="name flex">
+<span>def <span class="ident">merge</span></span>(<span>map: list) ‑> list</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This will save the map and the score u are currently at</p></div>
+<div class="desc"><p>It will add the numbers together always in left direction, and will use other functions to get other directions done</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are checking in</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The added map</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; merge(listexample1)
+[[4, 0, 4, 0], [4, 0, 4, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+&gt;&gt;&gt; merge(listexample2)
+[[4, 0, 4, 0], [32, 0, 32, 0], [8, 0, 8, 0], [2, 0, 4, 0]]
+&gt;&gt;&gt; merge(listexample3)
+[[16, 0, 16, 0], [16, 0, 16, 0], [0, 0, 0, 0], [4, 0, 2, 2048]]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def mentes(map:list, score:int) -&gt; None:
-    &#34;&#34;&#34;This will save the map and the score u are currently at
+<pre><code class="python">def merge(map:list) -&gt; list:
+    &#34;&#34;&#34;It will add the numbers together always in left direction, and will use other functions to get other directions done
+
+    Args:
+        map (list): The map u are checking in
+
+    Returns:
+        list: The added map
+    &gt;&gt;&gt; merge(listexample1)
+    [[4, 0, 4, 0], [4, 0, 4, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; merge(listexample2)
+    [[4, 0, 4, 0], [32, 0, 32, 0], [8, 0, 8, 0], [2, 0, 4, 0]]
+    &gt;&gt;&gt; merge(listexample3)
+    [[16, 0, 16, 0], [16, 0, 16, 0], [0, 0, 0, 0], [4, 0, 2, 2048]]
     &#34;&#34;&#34;
-    import json
-    file = open(&#34;állás.txt&#34;,&#34;w&#34;)
-    data = {
-        &#34;map&#34;: map,
-        &#34;score&#34;: score,
-    }
-    json.dump(data, file)
-    file.close()</code></pre>
+    for i in range(len(map)):
+        for j in range(len(map[i])- 1):
+            if map[i][j] != 0 and map[i][j] == map[i][j + 1]:
+                map[i][j] *= 2
+                map[i][j + 1] = 0
+    
+    return map</code></pre>
 </details>
 </dd>
 <dt id="alapok.move_down"><code class="name flex">
@@ -698,7 +890,14 @@ def move_down(map:list) -&gt; list:
 <dl>
 <dt><code>list</code></dt>
 <dd>The changed map</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; move_down(listexample1)
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [4, 4, 4, 4]]
+&gt;&gt;&gt; move_down(listexample2)
+[[2, 0, 2, 2], [16, 2, 16, 16], [4, 16, 4, 4], [2, 4, 2, 2]]
+&gt;&gt;&gt; move_down(listexample3)
+[[0, 0, 0, 0], [0, 0, 0, 0], [16, 16, 16, 16], [2, 2, 2, 2048]]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -711,10 +910,16 @@ def move_down(map:list) -&gt; list:
 
     Returns:
         list: The changed map
+    &gt;&gt;&gt; move_down(listexample1)
+    [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [4, 4, 4, 4]]
+    &gt;&gt;&gt; move_down(listexample2)
+    [[2, 0, 2, 2], [16, 2, 16, 16], [4, 16, 4, 4], [2, 4, 2, 2]]
+    &gt;&gt;&gt; move_down(listexample3)
+    [[0, 0, 0, 0], [0, 0, 0, 0], [16, 16, 16, 16], [2, 2, 2, 2048]]
     &#34;&#34;&#34;
-    new_map = mapforditas(map)
+    new_map = transpose(map)
     new_map = move_right(new_map)
-    new_map = mapforditas(new_map)
+    new_map = transpose(new_map)
     return new_map</code></pre>
 </details>
 </dd>
@@ -732,7 +937,14 @@ def move_down(map:list) -&gt; list:
 <dl>
 <dt><code>list</code></dt>
 <dd>the changed map</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; move_left(listexample1)
+[[4, 4, 0, 0], [4, 4, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+&gt;&gt;&gt; move_left(listexample2)
+[[4, 4, 0, 0], [32, 32, 0, 0], [8, 8, 0, 0], [4, 2, 0, 0]]
+&gt;&gt;&gt; move_left(listexample3)
+[[16, 16, 0, 0], [16, 16, 0, 0], [0, 0, 0, 0], [4, 2, 2048, 0]]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -745,10 +957,17 @@ def move_down(map:list) -&gt; list:
 
     Returns:
         list: the changed map
+
+    &gt;&gt;&gt; move_left(listexample1)
+    [[4, 4, 0, 0], [4, 4, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; move_left(listexample2)
+    [[4, 4, 0, 0], [32, 32, 0, 0], [8, 8, 0, 0], [4, 2, 0, 0]]
+    &gt;&gt;&gt; move_left(listexample3)
+    [[16, 16, 0, 0], [16, 16, 0, 0], [0, 0, 0, 0], [4, 2, 2048, 0]]
     &#34;&#34;&#34;
-    new_map = osszehuzas(map)
-    new_map = osszegez(new_map)
-    new_map = osszehuzas(new_map)
+    new_map = pull_together(map)
+    new_map = merge(new_map)
+    new_map = pull_together(new_map)
     return new_map</code></pre>
 </details>
 </dd>
@@ -766,7 +985,14 @@ def move_down(map:list) -&gt; list:
 <dl>
 <dt><code>list</code></dt>
 <dd>The changed version of the map</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; move_right(listexample1)
+[[0, 0, 4, 4], [0, 0, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0]]
+&gt;&gt;&gt; move_right(listexample2)
+[[0, 0, 4, 4], [0, 0, 32, 32], [0, 0, 8, 8], [0, 0, 2, 4]]
+&gt;&gt;&gt; move_right(listexample3)
+[[0, 0, 16, 16], [0, 0, 16, 16], [0, 0, 0, 0], [0, 2, 4, 2048]]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -779,10 +1005,17 @@ def move_down(map:list) -&gt; list:
 
     Returns:
         list: The changed version of the map
+
+    &gt;&gt;&gt; move_right(listexample1)
+    [[0, 0, 4, 4], [0, 0, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; move_right(listexample2)
+    [[0, 0, 4, 4], [0, 0, 32, 32], [0, 0, 8, 8], [0, 0, 2, 4]]
+    &gt;&gt;&gt; move_right(listexample3)
+    [[0, 0, 16, 16], [0, 0, 16, 16], [0, 0, 0, 0], [0, 2, 4, 2048]]
     &#34;&#34;&#34;
-    new_map = sorvaltas(map)
+    new_map = reverse(map)
     new_map = move_left(new_map)
-    new_map = sorvaltas(new_map)
+    new_map = reverse(new_map)
     return new_map</code></pre>
 </details>
 </dd>
@@ -800,7 +1033,14 @@ def move_down(map:list) -&gt; list:
 <dl>
 <dt><code>list</code></dt>
 <dd>The changed map</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; move_up(listexample1)
+[[4, 4, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+&gt;&gt;&gt; move_up(listexample2)
+[[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 0, 2, 2]]
+&gt;&gt;&gt; move_up(listexample3)
+[[16, 16, 16, 16], [2, 2, 2, 2048], [0, 0, 0, 0], [0, 0, 0, 0]]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -813,55 +1053,25 @@ def move_down(map:list) -&gt; list:
 
     Returns:
         list: The changed map
+
+    &gt;&gt;&gt; move_up(listexample1)
+    [[4, 4, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; move_up(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 0, 2, 2]]
+    &gt;&gt;&gt; move_up(listexample3)
+    [[16, 16, 16, 16], [2, 2, 2, 2048], [0, 0, 0, 0], [0, 0, 0, 0]]
     &#34;&#34;&#34;
-    new_map = mapforditas(map)
+    new_map = transpose(map)
     new_map = move_left(new_map)
-    new_map = mapforditas(new_map)
+    new_map = transpose(new_map)
     return new_map</code></pre>
 </details>
 </dd>
-<dt id="alapok.osszegez"><code class="name flex">
-<span>def <span class="ident">osszegez</span></span>(<span>map: list) ‑> list</span>
+<dt id="alapok.pull_together"><code class="name flex">
+<span>def <span class="ident">pull_together</span></span>(<span>map: list) ‑> list</span>
 </code></dt>
 <dd>
-<div class="desc"><p>It will add the numbers together, and puts a ^on the second part</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u are checking in</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>list</code></dt>
-<dd>The added map</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def osszegez(map:list) -&gt; list:
-    &#34;&#34;&#34;It will add the numbers together, and puts a ^on the second part
-
-    Args:
-        map (list): The map u are checking in
-
-    Returns:
-        list: The added map
-    &#34;&#34;&#34;
-    for i in range(len(map)):
-        for j in range(len(map[i])- 1):
-            if map[i][j] != 0 and map[i][j] == map[i][j + 1]:
-                map[i][j] *= 2
-                map[i][j + 1] = 0
-    
-    return map</code></pre>
-</details>
-</dd>
-<dt id="alapok.osszehuzas"><code class="name flex">
-<span>def <span class="ident">osszehuzas</span></span>(<span>map: list) ‑> list</span>
-</code></dt>
-<dd>
-<div class="desc"><p>This function will pull the numbers in the map together</p>
+<div class="desc"><p>This function will reutrn a new map, that is basically the same, but has no zeros inbetween the numbers</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
@@ -871,19 +1081,33 @@ def move_down(map:list) -&gt; list:
 <dl>
 <dt><code>list</code></dt>
 <dd>The pulled form of the map</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; pull_together(listexample1)
+[[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+&gt;&gt;&gt; pull_together(listexample2)
+[[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 0]]
+&gt;&gt;&gt; pull_together(listexample3)
+[[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2, 2, 2, 2048]]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def osszehuzas(map:list) -&gt; list:
-    &#34;&#34;&#34;This function will pull the numbers in the map together
+<pre><code class="python">def pull_together(map:list) -&gt; list:
+    &#34;&#34;&#34;This function will reutrn a new map, that is basically the same, but has no zeros inbetween the numbers
 
     Args:
         map (list): The map u are using
 
     Returns:
         list: The pulled form of the map
+    
+    &gt;&gt;&gt; pull_together(listexample1)
+    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; pull_together(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 0]]
+    &gt;&gt;&gt; pull_together(listexample3)
+    [[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2, 2, 2, 2048]]
     &#34;&#34;&#34;
     new_map = []
 
@@ -900,43 +1124,8 @@ def move_down(map:list) -&gt; list:
     return new_map</code></pre>
 </details>
 </dd>
-<dt id="alapok.set_table"><code class="name flex">
-<span>def <span class="ident">set_table</span></span>(<span>)</span>
-</code></dt>
-<dd>
-<div class="desc"><p>This is the start of everything, this will generate the first table, with a 2 in a random
-place</p>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>None</code></dt>
-<dd>This returns nothing, only prints out the table</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def set_table():
-    &#34;&#34;&#34;This is the start of everything, this will generate the first table, with a 2 in a random  place
-
-    Returns:
-        None: This returns nothing, only prints out the table
-    &#34;&#34;&#34;
-    map = []
-    for i in range(4):
-        sor = [0]*4
-        map.append(sor)
-
-    print(&#34;Üdvözöllek a 2048-as játékban, a aprancsok a következők: &#34;)
-    print(&#34;w-fel/a-balra/s-le/d-jobbra/save-kimentés,befejezés&#34;)
-    print(&#34;a játék kimenti ahol állsz ha az end parancsot nyomod meg, sok szerencsét&#34;)
-    print(&#34;Add meg a parncsot&#34;)
-    give_new_2(map)
-
-    return map</code></pre>
-</details>
-</dd>
-<dt id="alapok.sorvaltas"><code class="name flex">
-<span>def <span class="ident">sorvaltas</span></span>(<span>map: list) ‑> list</span>
+<dt id="alapok.reverse"><code class="name flex">
+<span>def <span class="ident">reverse</span></span>(<span>map: list) ‑> list</span>
 </code></dt>
 <dd>
 <div class="desc"><p>This will reverse the map</p>
@@ -949,12 +1138,19 @@ place</p>
 <dl>
 <dt><code>list</code></dt>
 <dd>The reversed version of map</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; reverse(listexample1)
+[[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+&gt;&gt;&gt; reverse(listexample2)
+[[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 0, 2]]
+&gt;&gt;&gt; reverse(listexample3)
+[[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2048, 2, 2, 2]]
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def sorvaltas(map:list) -&gt; list:
+<pre><code class="python">def reverse(map:list) -&gt; list:
     &#34;&#34;&#34;
     This will reverse the map
 
@@ -963,6 +1159,12 @@ place</p>
 
     Returns:
         list: The reversed version of map
+    &gt;&gt;&gt; reverse(listexample1)
+    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
+    &gt;&gt;&gt; reverse(listexample2)
+    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 0, 2]]
+    &gt;&gt;&gt; reverse(listexample3)
+    [[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2048, 2, 2, 2]] 
     &#34;&#34;&#34;
     new_map = []
     for i in range(4):
@@ -973,76 +1175,160 @@ place</p>
     return new_map</code></pre>
 </details>
 </dd>
-<dt id="alapok.vanenulla"><code class="name flex">
-<span>def <span class="ident">vanenulla</span></span>(<span>map: list) ‑> bool</span>
+<dt id="alapok.save"><code class="name flex">
+<span>def <span class="ident">save</span></span>(<span>map: list, score: int) ‑> NoneType</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This function checks if there is a 0 on the map</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u are checking in</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>bool</code></dt>
-<dd>True if there is a 0 on the map and false otherwise</dd>
-</dl></div>
+<div class="desc"><p>This will save the map and the score u are currently at</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def vanenulla(map:list) -&gt; bool:
-    &#34;&#34;&#34;This function checks if there is a 0 on the map
-
-    Args:
-        map (list): The map u are checking in
-
-    Returns:
-        bool: True if there is a 0 on the map and false otherwise
+<pre><code class="python">def save(map:list, score:int) -&gt; None:
+    &#34;&#34;&#34;This will save the map and the score u are currently at
     &#34;&#34;&#34;
-    nulla = 0
-    for i in range(len(map)):
-        for j in range(len(map[i])):
-            if map[i][j] == 0:
-                return True
-    return False</code></pre>
+    import json
+    file = open(&#34;állás.txt&#34;,&#34;w&#34;)
+    data = {
+        &#34;map&#34;: map,
+        &#34;score&#34;: score,
+    }
+    json.dump(data, file)
+    file.close()</code></pre>
 </details>
 </dd>
-<dt id="alapok.vertical_move_exists"><code class="name flex">
-<span>def <span class="ident">vertical_move_exists</span></span>(<span>map: list) ‑> bool</span>
+<dt id="alapok.score"><code class="name flex">
+<span>def <span class="ident">score</span></span>(<span>map: list) ‑> int</span>
 </code></dt>
 <dd>
-<div class="desc"><p>This will check if you can move vertically or not, also used in the lose function</p>
+<div class="desc"><p>The function that calculates the score that the player has. First it calculates every number that is on the table, than the value gets multiplied by 10</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
-<dd>The map u checking in</dd>
+<dd>The map</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>bool</code></dt>
-<dd>Return a True if you can, a false if you can't</dd>
+<dt><code>int</code></dt>
+<dd>The claculated score</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def vertical_move_exists(map:list) -&gt; bool:
-    &#34;&#34;&#34;This will check if you can move vertically or not, also used in the lose function
+<pre><code class="python">def score(map:list) -&gt; int:
+    &#34;&#34;&#34;The function that calculates the score that the player has. First it calculates every number that is on the table, than the value gets multiplied by 10
 
     Args:
-        map (list): The map u checking in
+        map (list): The map
 
     Returns:
-        bool: Return a True if you can, a false if you can&#39;t
+        int: The claculated score
     &#34;&#34;&#34;
-    for i in range(len(map)-1):
+    allscore = 0
+    for i in range(len(map)):
         for j in range(len(map[i])):
-            if map[i][j] == map[i + 1][j]:
-                return True
+            tempscore = map[i][j] * 10
+            allscore += tempscore
     
-    return False</code></pre>
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 1024:
+                allscore += 500
+    
+    for i in range(len(map)):
+        for j in range(len(map[i])):
+            if map[i][j] == 2048:
+                allscore += 1000
+                
+    return allscore</code></pre>
+</details>
+</dd>
+<dt id="alapok.set_table"><code class="name flex">
+<span>def <span class="ident">set_table</span></span>(<span>) ‑> NoneType</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This is the start of everything, this will generate the first table, with a 2 in a random
+place</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>None</code></dt>
+<dd>This returns nothing, only prints out the table</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; set_table()
+[[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 2, 0]]
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_table() -&gt; None:
+    &#34;&#34;&#34;This is the start of everything, this will generate the first table, with a 2 in a random  place
+
+    Returns:
+        None: This returns nothing, only prints out the table
+    
+    &gt;&gt;&gt; set_table()
+    [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 2, 0]]
+    &#34;&#34;&#34;
+    map = []
+    for i in range(4):
+        sor = [0]*4
+        map.append(sor)
+
+    give_new_2(map)
+
+    return map</code></pre>
+</details>
+</dd>
+<dt id="alapok.transpose"><code class="name flex">
+<span>def <span class="ident">transpose</span></span>(<span>map: list) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This will interchange the maps coluumns and rows</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>map</code></strong> :&ensp;<code>list</code></dt>
+<dd>The map u are interchaning</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>The interchanged version of the map</dd>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; transpose(listexample1)
+[[2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0]]
+&gt;&gt;&gt; transpose(listexample2)
+[[2, 16, 4, 2], [2, 16, 4, 0], [2, 16, 4, 2], [2, 16, 4, 2]]
+&gt;&gt;&gt; transpose(listexample3)
+[[8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2048]]
+</code></pre></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def transpose(map:list) -&gt; list:
+    &#34;&#34;&#34;This will interchange the maps coluumns and rows
+
+    Args:
+        map (list): The map u are interchaning
+
+    Returns:
+        list: The interchanged version of the map
+    &gt;&gt;&gt; transpose(listexample1)
+    [[2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0]]
+    &gt;&gt;&gt; transpose(listexample2)
+    [[2, 16, 4, 2], [2, 16, 4, 0], [2, 16, 4, 2], [2, 16, 4, 2]]
+    &gt;&gt;&gt; transpose(listexample3)
+    [[8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2048]]
+    &#34;&#34;&#34;
+    new_map = []
+    for i in range(4):
+        new_map.append([])
+        for j in range(4):
+            new_map[i].append(map[j][i])
+    
+    return new_map</code></pre>
 </details>
 </dd>
 <dt id="alapok.win"><code class="name flex">
@@ -1059,7 +1345,14 @@ place</p>
 <dl>
 <dt><code>bool</code></dt>
 <dd>Will give a true if you have won and a false if you haven't won'</dd>
-</dl></div>
+</dl>
+<pre><code class="language-python-repl">&gt;&gt;&gt; win(listexample1)
+False
+&gt;&gt;&gt; win(listexample2)
+False
+&gt;&gt;&gt; win(listexample3)
+True
+</code></pre></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
@@ -1072,6 +1365,12 @@ place</p>
 
     Returns:
         bool: Will give a true if you have won and a false if you haven&#39;t won&#39;
+    &gt;&gt;&gt; win(listexample1)
+    False
+    &gt;&gt;&gt; win(listexample2)
+    False
+    &gt;&gt;&gt; win(listexample3)
+    True
     &#34;&#34;&#34;
     for i in range(4):
         for j in range(4):
@@ -1094,24 +1393,25 @@ place</p>
 <ul id="index">
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="alapok.betoltes" href="#alapok.betoltes">betoltes</a></code></li>
+<li><code><a title="alapok.can_it_merge_horizontally" href="#alapok.can_it_merge_horizontally">can_it_merge_horizontally</a></code></li>
+<li><code><a title="alapok.can_it_merge_vertically" href="#alapok.can_it_merge_vertically">can_it_merge_vertically</a></code></li>
 <li><code><a title="alapok.getcommand" href="#alapok.getcommand">getcommand</a></code></li>
 <li><code><a title="alapok.give_new_2" href="#alapok.give_new_2">give_new_2</a></code></li>
-<li><code><a title="alapok.horizontal_move_exists" href="#alapok.horizontal_move_exists">horizontal_move_exists</a></code></li>
+<li><code><a title="alapok.is_there_zero" href="#alapok.is_there_zero">is_there_zero</a></code></li>
+<li><code><a title="alapok.load" href="#alapok.load">load</a></code></li>
 <li><code><a title="alapok.lose" href="#alapok.lose">lose</a></code></li>
-<li><code><a title="alapok.mapforditas" href="#alapok.mapforditas">mapforditas</a></code></li>
 <li><code><a title="alapok.mapprint" href="#alapok.mapprint">mapprint</a></code></li>
-<li><code><a title="alapok.mentes" href="#alapok.mentes">mentes</a></code></li>
+<li><code><a title="alapok.merge" href="#alapok.merge">merge</a></code></li>
 <li><code><a title="alapok.move_down" href="#alapok.move_down">move_down</a></code></li>
 <li><code><a title="alapok.move_left" href="#alapok.move_left">move_left</a></code></li>
 <li><code><a title="alapok.move_right" href="#alapok.move_right">move_right</a></code></li>
 <li><code><a title="alapok.move_up" href="#alapok.move_up">move_up</a></code></li>
-<li><code><a title="alapok.osszegez" href="#alapok.osszegez">osszegez</a></code></li>
-<li><code><a title="alapok.osszehuzas" href="#alapok.osszehuzas">osszehuzas</a></code></li>
+<li><code><a title="alapok.pull_together" href="#alapok.pull_together">pull_together</a></code></li>
+<li><code><a title="alapok.reverse" href="#alapok.reverse">reverse</a></code></li>
+<li><code><a title="alapok.save" href="#alapok.save">save</a></code></li>
+<li><code><a title="alapok.score" href="#alapok.score">score</a></code></li>
 <li><code><a title="alapok.set_table" href="#alapok.set_table">set_table</a></code></li>
-<li><code><a title="alapok.sorvaltas" href="#alapok.sorvaltas">sorvaltas</a></code></li>
-<li><code><a title="alapok.vanenulla" href="#alapok.vanenulla">vanenulla</a></code></li>
-<li><code><a title="alapok.vertical_move_exists" href="#alapok.vertical_move_exists">vertical_move_exists</a></code></li>
+<li><code><a title="alapok.transpose" href="#alapok.transpose">transpose</a></code></li>
 <li><code><a title="alapok.win" href="#alapok.win">win</a></code></li>
 </ul>
 </li>
