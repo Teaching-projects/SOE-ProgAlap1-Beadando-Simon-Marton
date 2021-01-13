@@ -1,66 +1,50 @@
 from typing import List, Set, Dict, Tuple, Optional
 import json
 import random
-listexample1 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-listexample2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,0,2,2]]
-listexample3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
+
 
 def mapprint(map:list) -> None:
     """The function that prints out the map
 
     Args:
         map (list): The map that is given here will be printed out
-
-    >>> mapprint(listexample1)
-    [2, 2, 2, 2]
-    [2, 2, 2, 2]
-    [0, 0, 0, 0]
-    [0, 0, 0, 0]
-    >>> mapprint(listexapmle2)
-    [2, 2, 2, 2]
-    [16, 16, 16, 16]
+    >>> mapprint([[2, 4, 16, 64],[256, 16, 4, 16],[256, 512, 1024, 2],[64, 32, 64, 32]])
+    [2, 4, 16, 64]
+    [256, 16, 4, 16]
+    [256, 512, 1024, 2]
+    [64, 32, 64, 32]
+    >>> mapprint([[4, 4, 4, 4],[4, 4, 4, 4],[4, 4, 4, 4],[2048, 2, 2, 2]])
     [4, 4, 4, 4]
-    [2, 2, 2, 2]
-    >>> mapprint(listexample3)
-    [8, 8, 8, 8]
-    [8, 8, 8, 8]
-    [0, 0, 0, 0]
-    [2, 2, 2, 2048]
+    [4, 4, 4, 4]
+    [4, 4, 4, 4]
+    [2048, 2, 2, 2]
     """
-    for i in range(4):
-        print(map[i])
-
+    for row in map:
+        print(row)
 
 def give_new_2(map:list) -> None:
     """A function that will put a new 2 in a random location where 0-s are present
 
     Args:
         map (list): The map that u want to use
-    >>> give_new_2(listexample1)
-    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [2, 0, 0, 0]]
-    >>> give_new_2(listexample2)
-    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 2]]
     """
-    sor = random.randint(0,3)
-    oszlop = random.randint(0,3)
-    while map[sor][oszlop] != 0:
-        sor = random.randint(0,3)
-        oszlop = random.randint(0,3)
-    map[sor][oszlop] = 2
+    row = random.randint(0,3)
+    coluumn = random.randint(0,3)
+    while map[row][coluumn] != 0:
+        row = random.randint(0,3)
+        coluumn = random.randint(0,3)
+    map[row][coluumn] = 2
 
-def set_table() -> None:
+def set_table() -> list:
     """This is the start of everything, this will generate the first table, with a 2 in a random  place
 
     Returns:
-        None: This returns nothing, only prints out the table
-    
-    >>> set_table()
-    [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 2, 0]]
+        list: the starting map
     """
     map = []
-    for i in range(4):
-        sor = [0]*4
-        map.append(sor)
+    for row in range(4):
+        rows = [0]*4
+        map.append(rows)
 
     give_new_2(map)
 
@@ -74,22 +58,19 @@ def win(map:list) -> bool:
 
     Returns:
         bool: Will give a true if you have won and a false if you haven't won'
-    >>> win(listexample1)
+    >>> win([[2, 4, 2, 4],[4, 4, 4, 4],[16, 2, 16, 2],[2, 0, 2, 0]])
     False
-    >>> win(listexample2)
+    >>> win([[2, 4, 16, 64],[256, 16, 4, 16],[256, 512, 1024, 2],[64, 32, 64, 32]])
     False
-    >>> win(listexample3)
+    >>> win([[4, 4, 4, 4],[4, 4, 4, 4],[4, 4, 4, 4],[2048, 2, 2, 2]])
     True
     """
-    for i in range(4):
-        for j in range(4):
-            if map[i][j] == 2048:
-                return True
-    
+    for row in map:
+        if 2048 in row:
+            return True
     return False
 
-
-def can_it_merge_horizontally(map:list) -> bool:
+def can_list_merge_horizontally(map:list) -> bool:
     """This is used in the lose function and checks if you can merge horizontally or not
 
     Args:
@@ -98,22 +79,21 @@ def can_it_merge_horizontally(map:list) -> bool:
     Returns:
         bool: Return a True if you can, a false if you can't
     
-    >>> can_it_merge_horizontally(listexample1)
+    >>> can_list_merge_horizontally([[2, 4, 2, 4],[4, 4, 4, 4],[16, 2, 16, 2],[2, 0, 2, 0]])
     True
-    >>> can_it_merge_horizontally(listexample2)
-    True
-    >>> can_it_merge_horizontally(listexample3)
+    >>> can_list_merge_horizontally([[2, 4, 16, 64],[256, 16, 4, 16],[256, 512, 1024, 2],[64, 32, 64, 32]])
+    False
+    >>> can_list_merge_horizontally([[4, 4, 4, 4],[4, 4, 4, 4],[4, 4, 4, 4],[2048, 2, 2, 2]])
     True
     """
-    for i in range(len(map)):
-        for j in range(len(map[i])-1):
-            if map[i][j] == map[i][j + 1]:
+    for row in range(len(map)):
+        for coluumn in range(len(map[row])-1):
+            if map[row][coluumn] == map[row][coluumn +1]:
                 return True
     
     return False
 
-
-def can_it_merge_vertically(map:list) -> bool:
+def can_list_merge_vertically(map:list) -> bool:
     """This function checks whether you can merge vertically or not
 
     Args:
@@ -121,16 +101,16 @@ def can_it_merge_vertically(map:list) -> bool:
 
     Returns:
         bool: Rteurn a true if you can a false otherwise
-    >>> can_it_merge_vertically(listexample1)
+    >>> can_list_merge_vertically([[2, 4, 2, 4],[4, 4, 4, 4],[16, 2, 16, 2],[2, 0, 2, 0]])
     True
-    >>> can_it_merge_vertically(listexample2)
-    False
-    >>> can_it_merge_vertically(listexample3)
+    >>> can_list_merge_vertically([[2, 4, 16, 64],[256, 16, 4, 16],[256, 512, 1024, 2],[64, 32, 64, 32]])
+    True
+    >>> can_list_merge_vertically([[4, 4, 4, 4],[4, 4, 4, 4],[4, 4, 4, 4],[2048, 2, 2, 2]])
     True
     """
-    for i in range(len(map)-1):
-        for j in range(len(map[i])):
-            if map[i][j] == map[i + 1][j]:
+    for row in range(len(map)-1):
+        for coluumn in range(len(map[row])):
+            if map[row][coluumn] == map[row + 1][coluumn]:
                 return True
     
     return False
@@ -143,18 +123,16 @@ def is_there_zero(map:list) -> bool:
 
     Returns:
         bool: True if there is a 0 on the map and false otherwise
-    >>> is_there_zero(listexample1)
-    True
-    >>> is_there_zero(listexample2)
-    True
-    >>> is_there_zero(listexample3)
+    >>> is_there_zero([[1024, 4, 16, 64],[4, 64, 6, 4],[16, 1024, 16, 512],[2, 32, 2, 1024]])
+    False
+    >>> is_there_zero([[2, 4, 4, 4],[4, 4, 2, 4],[16, 4, 2, 2],[2, 4, 2, 2]])
+    False
+    >>> is_there_zero([[2, 4, 2, 2],[0, 4, 2, 4],[2, 2, 2, 2],[4, 4, 2, 2]])
     True
     """
-    nulla = 0
-    for i in range(len(map)):
-        for j in range(len(map[i])):
-            if map[i][j] == 0:
-                return True
+    for row in map:
+        if 0 in row:
+            return True
     return False
 
 def lose(map:list) -> bool:
@@ -166,19 +144,32 @@ def lose(map:list) -> bool:
     Returns:
         bool: Return a True if you Lost, a false if you didnt'
     
-    >>> lose(listexample1)
+    >>> lose([[1024, 4, 16, 64],[4, 64, 6, 4],[16, 1024, 16, 512],[2, 32, 2, 1024]])
+    True
+    >>> lose([[2, 4, 4, 4],[4, 4, 2, 4],[16, 4, 2, 2],[2, 4, 2, 2]])
     False
-    >>> lose(listexample2)
-    False
-    >>> lose(listexample3)
+    >>> lose([[2, 4, 2, 2],[0, 4, 2, 4],[2, 2, 2, 2],[4, 4, 2, 2]])
     False
     """
-    if not is_there_zero(map) and not can_it_merge_vertically(map) and not can_it_merge_horizontally(map):
-        return True
-    else:
-        return False
+    return not is_there_zero(map) and not can_list_merge_vertically(map) and not can_list_merge_horizontally(map)
 
+def pull_row_together(row:list) -> list:
+    """This function takes 1 list, and pulls all the numbers to the left, and leaving zeros at their place
 
+    Args:
+        row (list): the list u want to change
+
+    Returns:
+        list: the changed list
+    """
+    new_row = [0,0,0,0]
+    pos = 0
+    for number in range(4):
+        if row[number] != 0:
+            new_row[pos] = row[number]
+            pos += 1
+
+    return new_row
 
 def pull_together(map:list) -> list:
     """This function will reutrn a new map, that is basically the same, but has no zeros inbetween the numbers
@@ -189,27 +180,35 @@ def pull_together(map:list) -> list:
     Returns:
         list: The pulled form of the map
     
-    >>> pull_together(listexample1)
-    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
-    >>> pull_together(listexample2)
-    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 2, 0]]
-    >>> pull_together(listexample3)
-    [[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2, 2, 2, 2048]]
+    >>> pull_together([[2, 0, 0, 4],[4, 0, 0, 4],[16, 0, 0, 2],[2, 0, 2, 0]])
+    [[2, 4, 0, 0], [4, 4, 0, 0], [16, 2, 0, 0], [2, 2, 0, 0]]
+    >>> pull_together([[2, 0, 0, 4],[4, 0, 2, 4],[16, 0, 2, 2],[2, 0, 2, 2]])
+    [[2, 4, 0, 0], [4, 2, 4, 0], [16, 2, 2, 0], [2, 2, 2, 0]]
+    >>> pull_together([[2, 0, 2, 2],[0, 0, 2, 4],[0, 0, 2, 2],[0, 0, 2, 2]])
+    [[2, 2, 2, 0], [2, 4, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0]]
     """
     new_map = []
 
-    for i in range(4):
-        new_map.append([0] * 4)
+    for row in range(len(map)):
+        new_row = pull_row_together(map[row])
+        new_map.append(new_row)
 
-    for i in range(4): 
-        pos = 0
-        for j in range(4): 
-            if (map[i][j] != 0): 
-                new_map[i][pos] = map[i][j] 
-                pos += 1
-                
     return new_map
 
+def merge_row(row:list) -> list:
+    """This function will take a list (row) and merges the numbers that are next to each other, to the left side, and will leave a 0 on the right side
+
+    Args:
+        row (list): the list u want to change
+
+    Returns:
+        list: the changed list
+    """
+    for number in range(len(row)-1):
+        if row[number] != 0 and row[number] == row[number + 1]:
+                row[number] *= 2
+                row[number + 1] = 0
+    return row
 
 def merge(map:list) -> list:
     """It will add the numbers together always in left direction, and will use other functions to get other directions done
@@ -219,20 +218,19 @@ def merge(map:list) -> list:
 
     Returns:
         list: The added map
-    >>> merge(listexample1)
-    [[4, 0, 4, 0], [4, 0, 4, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-    >>> merge(listexample2)
-    [[4, 0, 4, 0], [32, 0, 32, 0], [8, 0, 8, 0], [2, 0, 4, 0]]
-    >>> merge(listexample3)
-    [[16, 0, 16, 0], [16, 0, 16, 0], [0, 0, 0, 0], [4, 0, 2, 2048]]
+    >>> merge([[4, 4, 4, 4], [4, 4, 4, 4], [0, 0, 0, 0], [2, 2, 2, 2]])
+    [[8, 0, 8, 0], [8, 0, 8, 0], [0, 0, 0, 0], [4, 0, 4, 0]]
+    >>> merge([[4, 4, 4, 4], [2, 2, 2, 2], [16, 16, 16, 16], [2, 2, 2, 2]])
+    [[8, 0, 8, 0], [4, 0, 4, 0], [32, 0, 32, 0], [4, 0, 4, 0]]
+    >>> merge([[4, 4, 0, 0], [2, 2, 0, 0], [16, 16, 16, 16], [2, 2, 2, 2]])
+    [[8, 0, 0, 0], [4, 0, 0, 0], [32, 0, 32, 0], [4, 0, 4, 0]]
     """
-    for i in range(len(map)):
-        for j in range(len(map[i])- 1):
-            if map[i][j] != 0 and map[i][j] == map[i][j + 1]:
-                map[i][j] *= 2
-                map[i][j + 1] = 0
-    
-    return map
+    new_map = []
+    for row in range(len(map)):
+        new_row = merge_row(map[row])
+        new_map.append(new_row)
+
+    return new_map
 
 
 def reverse(map:list) -> list:
@@ -244,18 +242,18 @@ def reverse(map:list) -> list:
 
     Returns:
         list: The reversed version of map
-    >>> reverse(listexample1)
-    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]]
-    >>> reverse(listexample2)
-    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 2, 0, 2]]
-    >>> reverse(listexample3)
-    [[8, 8, 8, 8], [8, 8, 8, 8], [0, 0, 0, 0], [2048, 2, 2, 2]] 
+    >>> reverse([[0, 0, 2, 2], [0, 0, 2, 2], [0, 0, 0, 0], [0, 0, 0, 0]])
+    [[2, 2, 0, 0], [2, 2, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+    >>> reverse([[2, 0, 2, 2], [2, 0, 2, 2], [16, 0, 4, 2], [2, 0, 16, 0]])
+    [[2, 2, 0, 2], [2, 2, 0, 2], [2, 4, 0, 16], [0, 16, 0, 2]]
+    >>> reverse([[2, 0, 0, 0], [0, 0, 0, 2], [16, 0, 0, 0], [2, 0, 0, 0]])
+    [[0, 0, 0, 2], [2, 0, 0, 0], [0, 0, 0, 16], [0, 0, 0, 2]]
     """
     new_map = []
-    for i in range(4):
+    for row in range(4):
         new_map.append([])
-        for j in range(4):
-            new_map[i].append(map[i][3-j])
+        for coluumn in range(4):
+            new_map[row].append(map[row][3-coluumn])
 
     return new_map
 
@@ -267,63 +265,21 @@ def transpose(map:list) -> list:
 
     Returns:
         list: The interchanged version of the map
-    >>> transpose(listexample1)
-    [[2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0], [2, 2, 0, 0]]
-    >>> transpose(listexample2)
-    [[2, 16, 4, 2], [2, 16, 4, 0], [2, 16, 4, 2], [2, 16, 4, 2]]
-    >>> transpose(listexample3)
-    [[8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2], [8, 8, 0, 2048]]
+    >>> transpose([[2, 2, 0, 2], [2, 2, 0, 2], [2, 2, 0, 2], [2, 2, 0, 0]])
+    [[2, 2, 2, 2], [2, 2, 2, 2], [0, 0, 0, 0], [2, 2, 2, 0]]
+    >>> transpose([[0, 2, 0, 2], [0, 2, 0, 2], [0, 0, 0, 2], [2, 0, 0, 2]])
+    [[0, 0, 0, 2], [2, 2, 0, 0], [0, 0, 0, 0], [2, 2, 2, 2]]
+    >>> transpose([[0, 16, 0, 2], [0, 16, 0, 2], [16, 0, 0, 2], [2, 0, 0, 2]])
+    [[0, 0, 16, 2], [16, 16, 0, 0], [0, 0, 0, 0], [2, 2, 2, 2]]
     """
     new_map = []
-    for i in range(4):
+    for row in range(4):
         new_map.append([])
-        for j in range(4):
-            new_map[i].append(map[j][i])
+        for coluumn in range(4):
+            new_map[row].append(map[coluumn][row])
     
     return new_map
 
-def save(map:list, score:int) -> None:
-    """This will save the map and the score u are currently at
-    """
-    import json
-    file = open("állás.txt","w")
-    data = {
-        "map": map,
-        "score": score,
-    }
-    json.dump(data, file)
-    file.close()
-
-def load(filename:str) -> list:
-    """This will load the data that you have saved
-
-    Returns:
-        list: the saved list
-    """
-    import json
-    try:
-        file = open(filename,"r")
-        data = json.load(file)
-        global map
-        global score
-        map = data["map"]
-        score = data["score"]
-        file.close()
-    except:
-        map = set_table()
-        score = 0
-    return map
-
-def getcommand() -> str:
-    """The function to get the command
-
-    Returns:
-        str: The command
-    >>> getcommand()
-    s
-    """
-    command = input("Adj meg egy parancsot! ")
-    return command
 
 def score(map:list) -> int:
     """The function that calculates the score that the player has. First it calculates every number that is on the table, than the value gets multiplied by 10
@@ -361,12 +317,12 @@ def move_left(map:list) -> list:
     Returns:
         list: the changed map
 
-    >>> move_left(listexample1)
-    [[4, 4, 0, 0], [4, 4, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-    >>> move_left(listexample2)
-    [[4, 4, 0, 0], [32, 32, 0, 0], [8, 8, 0, 0], [4, 2, 0, 0]]
-    >>> move_left(listexample3)
-    [[16, 16, 0, 0], [16, 16, 0, 0], [0, 0, 0, 0], [4, 2, 2048, 0]]
+    >>> move_left([[16, 16, 4, 4], [8, 4, 4, 4], [16, 16, 4, 4], [16, 0, 2, 0]])
+    [[32, 8, 0, 0], [8, 8, 4, 0], [32, 8, 0, 0], [16, 2, 0, 0]]
+    >>> move_left([[16, 16, 4, 4], [4, 4, 4, 4], [16, 16, 2, 4], [16, 2, 2, 0]])
+    [[32, 8, 0, 0], [8, 8, 0, 0], [32, 2, 4, 0], [16, 4, 0, 0]]
+    >>> move_left([[16, 16, 64, 64], [16, 16, 4, 4], [32, 32, 2, 4], [16, 2, 2, 0]])
+    [[32, 128, 0, 0], [32, 8, 0, 0], [64, 2, 4, 0], [16, 4, 0, 0]]
     """
     new_map = pull_together(map)
     new_map = merge(new_map)
@@ -383,12 +339,12 @@ def move_right(map:list) -> list:
     Returns:
         list: The changed version of the map
 
-    >>> move_right(listexample1)
-    [[0, 0, 4, 4], [0, 0, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0]]
-    >>> move_right(listexample2)
-    [[0, 0, 4, 4], [0, 0, 32, 32], [0, 0, 8, 8], [0, 0, 2, 4]]
-    >>> move_right(listexample3)
-    [[0, 0, 16, 16], [0, 0, 16, 16], [0, 0, 0, 0], [0, 2, 4, 2048]]
+    >>> move_right([[0, 0, 4, 4], [0, 0, 4, 4], [0, 16, 0, 4], [0, 0, 2, 0]])
+    [[0, 0, 0, 8], [0, 0, 0, 8], [0, 0, 16, 4], [0, 0, 0, 2]]
+    >>> move_right([[16, 0, 4, 4], [8, 0, 4, 4], [0, 16, 4, 4], [16, 0, 2, 0]])
+    [[0, 0, 16, 8], [0, 0, 8, 8], [0, 0, 16, 8], [0, 0, 16, 2]]
+    >>> move_right([[16, 16, 4, 4], [8, 4, 4, 4], [16, 16, 4, 4], [16, 0, 2, 0]])
+    [[0, 0, 32, 8], [0, 8, 4, 8], [0, 0, 32, 8], [0, 0, 16, 2]]
     """
     new_map = reverse(map)
     new_map = move_left(new_map)
@@ -405,12 +361,12 @@ def move_up(map:list) -> list:
     Returns:
         list: The changed map
 
-    >>> move_up(listexample1)
-    [[4, 4, 4, 4], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
-    >>> move_up(listexample2)
-    [[2, 2, 2, 2], [16, 16, 16, 16], [4, 4, 4, 4], [2, 0, 2, 2]]
-    >>> move_up(listexample3)
-    [[16, 16, 16, 16], [2, 2, 2, 2048], [0, 0, 0, 0], [0, 0, 0, 0]]
+    >>> move_up([[16, 16, 64, 64], [16, 16, 4, 4], [32, 32, 2, 4], [16, 2, 2, 0]])
+    [[32, 32, 64, 64], [32, 32, 4, 8], [16, 2, 4, 0], [0, 0, 0, 0]]
+    >>> move_up([[16, 16, 64, 64], [16, 16, 4, 64], [32, 32, 2, 4], [32, 2, 2, 4]])
+    [[32, 32, 64, 128], [64, 32, 4, 8], [0, 2, 4, 0], [0, 0, 0, 0]]
+    >>> move_up([[64, 16, 64, 64], [64, 16, 4, 64], [124, 32, 2, 4], [124, 2, 2, 4]])
+    [[128, 32, 64, 128], [248, 32, 4, 8], [0, 2, 4, 0], [0, 0, 0, 0]]
     """
     new_map = transpose(map)
     new_map = move_left(new_map)
@@ -425,15 +381,14 @@ def move_down(map:list) -> list:
 
     Returns:
         list: The changed map
-    >>> move_down(listexample1)
-    [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [4, 4, 4, 4]]
-    >>> move_down(listexample2)
-    [[2, 0, 2, 2], [16, 2, 16, 16], [4, 16, 4, 4], [2, 4, 2, 2]]
-    >>> move_down(listexample3)
-    [[0, 0, 0, 0], [0, 0, 0, 0], [16, 16, 16, 16], [2, 2, 2, 2048]]
+    >>> move_down([[64, 16, 64, 4], [64, 16, 4, 4], [124, 32, 2, 4], [124, 2, 4, 4]])
+    [[0, 0, 64, 0], [0, 32, 4, 0], [128, 32, 2, 8], [248, 2, 4, 8]]
+    >>> move_down([[64, 16, 64, 4], [124, 16, 4, 4], [124, 32, 2, 4], [124, 2, 4, 4]])
+    [[0, 0, 64, 0], [64, 32, 4, 0], [124, 32, 2, 8], [248, 2, 4, 8]]
+    >>> move_down([[64, 16, 64, 4], [124, 16, 4, 4], [124, 32, 2, 4], [124, 32, 4, 4]])
+    [[0, 0, 64, 0], [64, 0, 4, 0], [124, 32, 2, 8], [248, 64, 4, 8]]
     """
     new_map = transpose(map)
     new_map = move_right(new_map)
     new_map = transpose(new_map)
     return new_map
-

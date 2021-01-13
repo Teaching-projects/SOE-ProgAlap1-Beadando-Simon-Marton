@@ -2,16 +2,22 @@ import json
 import alapok
 import sys
 from typing import List, Set, Dict, Tuple, Optional
-listexample1 = [[2,2,2,2],[2,2,2,2],[0,0,0,0],[0,0,0,0]]
-listexample2 = [[2,2,2,2],[16,16,16,16],[4,4,4,4],[2,0,2,2]]
-listexample3 = [[8,8,8,8],[8,8,8,8],[0,0,0,0],[2,2,2,2048]]
-def give_instructions() -> None:
+
+def bad_command() -> str:
+    """If you entered a bad command and error message will pop up
+
+    Returns:
+        str: An error message
+    """
+    print("Rossz gomb")
+    
+
+def get_instructions() -> None:
     """Gives out the instructions to the player
     """
-    print("Üdvözöllek a 2048-as játékban, a aprancsok a következők: ")
-    print("w-fel/a-balra/s-le/d-jobbra/store-kimentés,befejezés")
-    print("a játék kimenti ahol állsz ha az end parancsot nyomod meg, sok szerencsét")
-    print("Add meg a parncsot")
+    print("Üdvözöllek a 2048-as játékban, a parancsok a következők: ")
+    print("w-fel/a-balra/s-le/d-jobbra/save-kimentés,befejezés")
+    print("a játék kimenti ahol állsz ha a save parancsot nyomod meg, sok szerencsét")
 
 def writescore(map:list) -> None:
     """This will print out the score
@@ -21,16 +27,17 @@ def writescore(map:list) -> None:
     """
     print("Your current score is: {}".format(alapok.score(map)))
 
-def start() -> None:
+def start() -> list:
     """This will load a new map, or loads in the map from allas.txt if it exists.
 
     Returns:
-        None: This justs prints the table
+        list: The starting map
     """
-    give_instructions()
+    get_instructions()
     map = load("allas.txt")
     alapok.mapprint(map)
     writescore(map)
+    
     return map
 
 def get_current_state(map:list) -> None:
@@ -45,7 +52,7 @@ def get_current_state(map:list) -> None:
     elif alapok.lose(map) == True:
         print("You have Lost!")
         sys.exit()
-    elif alapok.is_there_zero(map) == False and (alapok.vertical_move_exists(map) == True or alapok.horizontal_move_exists(map) == True):
+    elif alapok.is_there_zero(map) == False and (alapok.can_list_merge_vertically(map) == True or alapok.can_list_merge_horizontally(map) == True):
         alapok.mapprint(map)
         print("erre nem tudsz már lépni de másik irányba igen")
         writescore(map)
@@ -54,14 +61,15 @@ def get_current_state(map:list) -> None:
         alapok.mapprint(map)
         writescore(map)
 
-def save(map:list, score:int) -> None:
+def save(map:list,filename:str) -> None:
     """This will save the map and the score u are currently at
     """
     import json
-    file = open("allas.txt","w")
+    filename = "allas.txt"
+    file = open(filename,"w")
     data = {
         "map": map,
-        "score": score,
+        "score": alapok.score(map)
     }
     json.dump(data, file)
     file.close()
@@ -83,29 +91,7 @@ def load(filename:str) -> list:
         file.close()
     except:
         map = alapok.set_table()
-        score = 0
     return map
-
-def getcommand() -> str:
-    """The function to get the command
-
-    Returns:
-        str: The command
-    >>> getcommand()
-    s
-    """
-    command = input("Adj meg egy parancsot! ")
-    return command
-
-def bad_command() -> str:
-    """If you entered a bad command and error message will pop up
-
-    Returns:
-        str: An error message
-    """
-    print("Rossz gomb")
-
-
 
 def basics(command:str,map:list) -> list:
     """This will handle every single command and what happens after that
@@ -132,16 +118,15 @@ def basics(command:str,map:list) -> list:
     elif command == "save":
         score = alapok.score(map)
         save(map,score)
-    else:
-        bad_command()
     return map
 
 def main() -> None:
     """Generates the map, and also handles the basic function
     """
     map = start()
-    
-
     while(True):
-        command = alapok.getcommand()
+        command = input("Adj meg egy parancsot")
+        while command not in ["s", "d", "a", "w", "save"]:
+            bad_command()
+            command = input("Adj meg egy parancsot")
         map = basics(command,map)
